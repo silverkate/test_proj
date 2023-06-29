@@ -4,7 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stx_form_bloc/src/blocs/form_bloc/form_bloc.dart';
+import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
+import 'package:test_proj/localization/index.dart';
 import 'package:test_proj/services/index.dart';
 import 'package:test_proj/styles/index.dart';
 import 'package:test_proj/widgets/index.dart';
@@ -75,7 +76,7 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
     showDialog(
       context: context,
       builder: (BuildContext context) => CupertinoAlertDialog(
-        title: const Text('Alert'),
+        title: Text(LocaleKeys.error.tr()),
         content: Text(state.error ?? ''),
         actions: [
           CupertinoDialogAction(
@@ -83,7 +84,7 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
             onPressed: () {
               context.popRoute();
             },
-            child: const Text('OK'),
+            child: Text(LocaleKeys.ok.tr()),
           ),
         ],
       ),

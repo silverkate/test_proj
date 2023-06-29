@@ -22,7 +22,8 @@ class CodegenLoader extends AssetLoader{
   "changePassword": "Changer le mot de passe",
   "languageName": "French",
   "signOut": "Se déconnecter",
-  "test": "test"
+  "error": "Error",
+  "ok": "OK"
 };
 static const Map<String,dynamic> enUS = {
   "screenText": "Screen",
@@ -38,7 +39,8 @@ static const Map<String,dynamic> enUS = {
   "changePassword": "Change Password",
   "languageName": "English",
   "signOut": "Sign Out",
-  "test": "test"
+  "error": "Error",
+  "ok": "OK"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"fr_FR": frFR, "en_US": enUS};
 static const List<Locale> supportedLocales = [Locale("fr", "FR"), Locale("en", "US")];

@@ -17,5 +17,6 @@
     "languageName": "French",
     "signOut": "Se déconnecter",
 
-    "test": "test"
+    "error": "Error",
+    "ok": "OK"
 }

@@ -13,6 +13,7 @@ abstract class  LocaleKeys {
   static const changePassword = 'changePassword';
   static const languageName = 'languageName';
   static const signOut = 'signOut';
-  static const test = 'test';
+  static const error = 'error';
+  static const ok = 'ok';
 
 }

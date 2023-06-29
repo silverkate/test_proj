@@ -17,5 +17,6 @@
     "languageName": "English",
     "signOut": "Sign Out",
 
-    "test": "test"
+    "error": "Error",
+    "ok": "OK"
 }
