@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:test_proj/blocs/index.dart';
 import 'package:test_proj/localization/index.dart';
 import 'package:test_proj/services/index.dart';
@@ -12,6 +10,9 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = getIt<AuthBloc>();
+    final name = bloc.state.userProfile.userName ?? '';
+
     return Container(
       width: MediaQuery.of(context).size.width * 0.75,
       height: MediaQuery.of(context).size.height,
@@ -35,6 +36,15 @@ class AppDrawer extends StatelessWidget {
                       backgroundImage: AssetImage(Assets.images.logoShort.path),
                     ),
                   ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    name,
+                    style: const TextStyle(
+                      color: AppColors.grey,
+                    ),
+                  ),
                 ),
                 const Divider(height: 20),
                 Padding(
@@ -79,6 +89,7 @@ class AppDrawer extends StatelessWidget {
     );
   }
 
+  /// Method that returns widget. Why?
   Widget buildMenuItem({
     required String text,
     required IconData iconData,
