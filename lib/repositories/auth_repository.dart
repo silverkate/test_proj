@@ -11,18 +11,18 @@ class AuthRepository {
   Stream<AuthenticationStatus> get authenticationStatus =>
       httpClient.authenticationStatus;
 
-  // TODO(Kate): error handling?
-  Future<void> signIn(String userName, String password) => httpClient.post(
-        '/auth/login',
-        data: {
-          'username': userName,
-          'password': password,
-        },
-      ).then((value) {
-        final responseMap = value.data as Map<String, dynamic>;
+  Future<void> signIn(String userName, String password) async {
+    final data = (await httpClient.post(
+      '/auth/login',
+      data: {
+        'username': userName,
+        'password': password,
+      },
+    ))
+        .data as Map<String, dynamic>;
 
-        return httpClient.setToken(responseMap['token'] as String);
-      });
+    return httpClient.setToken(data['token'] as String);
+  }
 
   Future<void> signOut() {
     return httpClient.clearToken();

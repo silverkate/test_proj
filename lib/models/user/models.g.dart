@@ -33,3 +33,44 @@ Map<String, dynamic> _$$_UserProfileToJson(_$_UserProfile instance) =>
       'phone': instance.phone,
       'v': instance.v,
     };
+
+_$_Name _$$_NameFromJson(Map<String, dynamic> json) => _$_Name(
+      firstname: json['firstname'] as String?,
+      lastname: json['lastname'] as String?,
+    );
+
+Map<String, dynamic> _$$_NameToJson(_$_Name instance) => <String, dynamic>{
+      'firstname': instance.firstname,
+      'lastname': instance.lastname,
+    };
+
+_$_Geolocation _$$_GeolocationFromJson(Map<String, dynamic> json) =>
+    _$_Geolocation(
+      lat: json['lat'] as String?,
+      long: json['long'] as String?,
+    );
+
+Map<String, dynamic> _$$_GeolocationToJson(_$_Geolocation instance) =>
+    <String, dynamic>{
+      'lat': instance.lat,
+      'long': instance.long,
+    };
+
+_$_Address _$$_AddressFromJson(Map<String, dynamic> json) => _$_Address(
+      geolocation: json['geolocation'] == null
+          ? null
+          : Geolocation.fromJson(json['geolocation'] as Map<String, dynamic>),
+      city: json['city'] as String?,
+      street: json['street'] as String?,
+      number: json['number'] as int?,
+      zipcode: json['zipcode'] as String?,
+    );
+
+Map<String, dynamic> _$$_AddressToJson(_$_Address instance) =>
+    <String, dynamic>{
+      'geolocation': instance.geolocation,
+      'city': instance.city,
+      'street': instance.street,
+      'number': instance.number,
+      'zipcode': instance.zipcode,
+    };

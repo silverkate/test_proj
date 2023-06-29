@@ -37,9 +37,15 @@ class LoginFormBloc extends FormBloc<String, String> {
   }
 
   @override
-  FutureOr<void> onSubmit() async {
-    await repository.signIn(username.toString(), password.toString());
+  Future<FutureOr<void>> onSubmit() async {
+    try {
+      await repository.signIn(username.toString(), password.toString());
 
-    emitSuccess('Success');
+      emitSuccess('Success');
+    } catch (error, stacktrace) {
+      addError(error, stacktrace);
+
+      emitFailure(error.toString());
+    }
   }
 }

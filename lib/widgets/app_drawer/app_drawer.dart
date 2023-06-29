@@ -4,6 +4,7 @@ import 'package:test_proj/blocs/index.dart';
 import 'package:test_proj/localization/index.dart';
 import 'package:test_proj/services/index.dart';
 import 'package:test_proj/styles/index.dart';
+import 'package:test_proj/widgets/app_drawer/app_drawer_menu_item.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -50,12 +51,12 @@ class AppDrawer extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
-                      buildMenuItem(
+                      AppDrawerMenuItem(
                         text: LocaleKeys.changePassword.tr(),
                         iconData: FontAwesomeIcons.lock,
                       ),
                       GestureDetector(
-                        child: buildMenuItem(
+                        child: AppDrawerMenuItem(
                           text: LocaleKeys.languageName.tr(),
                           iconData: FontAwesomeIcons.globe,
                         ),
@@ -69,7 +70,7 @@ class AppDrawer extends StatelessWidget {
                         },
                       ),
                       GestureDetector(
-                        child: buildMenuItem(
+                        child: AppDrawerMenuItem(
                           text: LocaleKeys.signOut.tr(),
                           iconData: FontAwesomeIcons.rightFromBracket,
                         ),
@@ -83,25 +84,6 @@ class AppDrawer extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  /// Method that returns widget. Why?
-  Widget buildMenuItem({
-    required String text,
-    required IconData iconData,
-  }) {
-    return ListTile(
-      leading: Icon(
-        iconData,
-        color: AppColors.grey,
-      ),
-      title: Text(
-        text,
-        style: const TextStyle(
-          color: AppColors.grey,
         ),
       ),
     );

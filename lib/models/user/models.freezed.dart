@@ -20,13 +20,11 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserProfile {
-  @JsonSerializable()
   Address? get address => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
-  @JsonSerializable()
   Name? get name => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   int? get v => throw _privateConstructorUsedError;
@@ -44,12 +42,12 @@ abstract class $UserProfileCopyWith<$Res> {
       _$UserProfileCopyWithImpl<$Res, UserProfile>;
   @useResult
   $Res call(
-      {@JsonSerializable() Address? address,
+      {Address? address,
       int? id,
       String? email,
       String? username,
       String? password,
-      @JsonSerializable() Name? name,
+      Name? name,
       String? phone,
       int? v});
 
@@ -149,12 +147,12 @@ abstract class _$$_UserProfileCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonSerializable() Address? address,
+      {Address? address,
       int? id,
       String? email,
       String? username,
       String? password,
-      @JsonSerializable() Name? name,
+      Name? name,
       String? phone,
       int? v});
 
@@ -225,12 +223,12 @@ class __$$_UserProfileCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserProfile implements _UserProfile {
   const _$_UserProfile(
-      {@JsonSerializable() this.address,
+      {this.address,
       this.id,
       this.email,
       this.username,
       this.password,
-      @JsonSerializable() this.name,
+      this.name,
       this.phone,
       this.v});
 
@@ -238,7 +236,6 @@ class _$_UserProfile implements _UserProfile {
       _$$_UserProfileFromJson(json);
 
   @override
-  @JsonSerializable()
   final Address? address;
   @override
   final int? id;
@@ -249,7 +246,6 @@ class _$_UserProfile implements _UserProfile {
   @override
   final String? password;
   @override
-  @JsonSerializable()
   final Name? name;
   @override
   final String? phone;
@@ -299,12 +295,12 @@ class _$_UserProfile implements _UserProfile {
 
 abstract class _UserProfile implements UserProfile {
   const factory _UserProfile(
-      {@JsonSerializable() final Address? address,
+      {final Address? address,
       final int? id,
       final String? email,
       final String? username,
       final String? password,
-      @JsonSerializable() final Name? name,
+      final Name? name,
       final String? phone,
       final int? v}) = _$_UserProfile;
 
@@ -312,7 +308,6 @@ abstract class _UserProfile implements UserProfile {
       _$_UserProfile.fromJson;
 
   @override
-  @JsonSerializable()
   Address? get address;
   @override
   int? get id;
@@ -323,7 +318,6 @@ abstract class _UserProfile implements UserProfile {
   @override
   String? get password;
   @override
-  @JsonSerializable()
   Name? get name;
   @override
   String? get phone;
@@ -332,5 +326,534 @@ abstract class _UserProfile implements UserProfile {
   @override
   @JsonKey(ignore: true)
   _$$_UserProfileCopyWith<_$_UserProfile> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Name _$NameFromJson(Map<String, dynamic> json) {
+  return _Name.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Name {
+  String? get firstname => throw _privateConstructorUsedError;
+  String? get lastname => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $NameCopyWith<Name> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NameCopyWith<$Res> {
+  factory $NameCopyWith(Name value, $Res Function(Name) then) =
+      _$NameCopyWithImpl<$Res, Name>;
+  @useResult
+  $Res call({String? firstname, String? lastname});
+}
+
+/// @nodoc
+class _$NameCopyWithImpl<$Res, $Val extends Name>
+    implements $NameCopyWith<$Res> {
+  _$NameCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? firstname = freezed,
+    Object? lastname = freezed,
+  }) {
+    return _then(_value.copyWith(
+      firstname: freezed == firstname
+          ? _value.firstname
+          : firstname // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastname: freezed == lastname
+          ? _value.lastname
+          : lastname // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_NameCopyWith<$Res> implements $NameCopyWith<$Res> {
+  factory _$$_NameCopyWith(_$_Name value, $Res Function(_$_Name) then) =
+      __$$_NameCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? firstname, String? lastname});
+}
+
+/// @nodoc
+class __$$_NameCopyWithImpl<$Res> extends _$NameCopyWithImpl<$Res, _$_Name>
+    implements _$$_NameCopyWith<$Res> {
+  __$$_NameCopyWithImpl(_$_Name _value, $Res Function(_$_Name) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? firstname = freezed,
+    Object? lastname = freezed,
+  }) {
+    return _then(_$_Name(
+      firstname: freezed == firstname
+          ? _value.firstname
+          : firstname // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastname: freezed == lastname
+          ? _value.lastname
+          : lastname // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Name implements _Name {
+  const _$_Name({this.firstname, this.lastname});
+
+  factory _$_Name.fromJson(Map<String, dynamic> json) => _$$_NameFromJson(json);
+
+  @override
+  final String? firstname;
+  @override
+  final String? lastname;
+
+  @override
+  String toString() {
+    return 'Name(firstname: $firstname, lastname: $lastname)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Name &&
+            (identical(other.firstname, firstname) ||
+                other.firstname == firstname) &&
+            (identical(other.lastname, lastname) ||
+                other.lastname == lastname));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, firstname, lastname);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_NameCopyWith<_$_Name> get copyWith =>
+      __$$_NameCopyWithImpl<_$_Name>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_NameToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Name implements Name {
+  const factory _Name({final String? firstname, final String? lastname}) =
+      _$_Name;
+
+  factory _Name.fromJson(Map<String, dynamic> json) = _$_Name.fromJson;
+
+  @override
+  String? get firstname;
+  @override
+  String? get lastname;
+  @override
+  @JsonKey(ignore: true)
+  _$$_NameCopyWith<_$_Name> get copyWith => throw _privateConstructorUsedError;
+}
+
+Geolocation _$GeolocationFromJson(Map<String, dynamic> json) {
+  return _Geolocation.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Geolocation {
+  String? get lat => throw _privateConstructorUsedError;
+  String? get long => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GeolocationCopyWith<Geolocation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GeolocationCopyWith<$Res> {
+  factory $GeolocationCopyWith(
+          Geolocation value, $Res Function(Geolocation) then) =
+      _$GeolocationCopyWithImpl<$Res, Geolocation>;
+  @useResult
+  $Res call({String? lat, String? long});
+}
+
+/// @nodoc
+class _$GeolocationCopyWithImpl<$Res, $Val extends Geolocation>
+    implements $GeolocationCopyWith<$Res> {
+  _$GeolocationCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? lat = freezed,
+    Object? long = freezed,
+  }) {
+    return _then(_value.copyWith(
+      lat: freezed == lat
+          ? _value.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      long: freezed == long
+          ? _value.long
+          : long // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_GeolocationCopyWith<$Res>
+    implements $GeolocationCopyWith<$Res> {
+  factory _$$_GeolocationCopyWith(
+          _$_Geolocation value, $Res Function(_$_Geolocation) then) =
+      __$$_GeolocationCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? lat, String? long});
+}
+
+/// @nodoc
+class __$$_GeolocationCopyWithImpl<$Res>
+    extends _$GeolocationCopyWithImpl<$Res, _$_Geolocation>
+    implements _$$_GeolocationCopyWith<$Res> {
+  __$$_GeolocationCopyWithImpl(
+      _$_Geolocation _value, $Res Function(_$_Geolocation) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? lat = freezed,
+    Object? long = freezed,
+  }) {
+    return _then(_$_Geolocation(
+      lat: freezed == lat
+          ? _value.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      long: freezed == long
+          ? _value.long
+          : long // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Geolocation implements _Geolocation {
+  const _$_Geolocation({this.lat, this.long});
+
+  factory _$_Geolocation.fromJson(Map<String, dynamic> json) =>
+      _$$_GeolocationFromJson(json);
+
+  @override
+  final String? lat;
+  @override
+  final String? long;
+
+  @override
+  String toString() {
+    return 'Geolocation(lat: $lat, long: $long)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Geolocation &&
+            (identical(other.lat, lat) || other.lat == lat) &&
+            (identical(other.long, long) || other.long == long));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, lat, long);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GeolocationCopyWith<_$_Geolocation> get copyWith =>
+      __$$_GeolocationCopyWithImpl<_$_Geolocation>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_GeolocationToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Geolocation implements Geolocation {
+  const factory _Geolocation({final String? lat, final String? long}) =
+      _$_Geolocation;
+
+  factory _Geolocation.fromJson(Map<String, dynamic> json) =
+      _$_Geolocation.fromJson;
+
+  @override
+  String? get lat;
+  @override
+  String? get long;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GeolocationCopyWith<_$_Geolocation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Address _$AddressFromJson(Map<String, dynamic> json) {
+  return _Address.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Address {
+  Geolocation? get geolocation => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  String? get street => throw _privateConstructorUsedError;
+  int? get number => throw _privateConstructorUsedError;
+  String? get zipcode => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AddressCopyWith<Address> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AddressCopyWith<$Res> {
+  factory $AddressCopyWith(Address value, $Res Function(Address) then) =
+      _$AddressCopyWithImpl<$Res, Address>;
+  @useResult
+  $Res call(
+      {Geolocation? geolocation,
+      String? city,
+      String? street,
+      int? number,
+      String? zipcode});
+
+  $GeolocationCopyWith<$Res>? get geolocation;
+}
+
+/// @nodoc
+class _$AddressCopyWithImpl<$Res, $Val extends Address>
+    implements $AddressCopyWith<$Res> {
+  _$AddressCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? geolocation = freezed,
+    Object? city = freezed,
+    Object? street = freezed,
+    Object? number = freezed,
+    Object? zipcode = freezed,
+  }) {
+    return _then(_value.copyWith(
+      geolocation: freezed == geolocation
+          ? _value.geolocation
+          : geolocation // ignore: cast_nullable_to_non_nullable
+              as Geolocation?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      street: freezed == street
+          ? _value.street
+          : street // ignore: cast_nullable_to_non_nullable
+              as String?,
+      number: freezed == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int?,
+      zipcode: freezed == zipcode
+          ? _value.zipcode
+          : zipcode // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $GeolocationCopyWith<$Res>? get geolocation {
+    if (_value.geolocation == null) {
+      return null;
+    }
+
+    return $GeolocationCopyWith<$Res>(_value.geolocation!, (value) {
+      return _then(_value.copyWith(geolocation: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_AddressCopyWith<$Res> implements $AddressCopyWith<$Res> {
+  factory _$$_AddressCopyWith(
+          _$_Address value, $Res Function(_$_Address) then) =
+      __$$_AddressCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {Geolocation? geolocation,
+      String? city,
+      String? street,
+      int? number,
+      String? zipcode});
+
+  @override
+  $GeolocationCopyWith<$Res>? get geolocation;
+}
+
+/// @nodoc
+class __$$_AddressCopyWithImpl<$Res>
+    extends _$AddressCopyWithImpl<$Res, _$_Address>
+    implements _$$_AddressCopyWith<$Res> {
+  __$$_AddressCopyWithImpl(_$_Address _value, $Res Function(_$_Address) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? geolocation = freezed,
+    Object? city = freezed,
+    Object? street = freezed,
+    Object? number = freezed,
+    Object? zipcode = freezed,
+  }) {
+    return _then(_$_Address(
+      geolocation: freezed == geolocation
+          ? _value.geolocation
+          : geolocation // ignore: cast_nullable_to_non_nullable
+              as Geolocation?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      street: freezed == street
+          ? _value.street
+          : street // ignore: cast_nullable_to_non_nullable
+              as String?,
+      number: freezed == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int?,
+      zipcode: freezed == zipcode
+          ? _value.zipcode
+          : zipcode // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Address implements _Address {
+  const _$_Address(
+      {this.geolocation, this.city, this.street, this.number, this.zipcode});
+
+  factory _$_Address.fromJson(Map<String, dynamic> json) =>
+      _$$_AddressFromJson(json);
+
+  @override
+  final Geolocation? geolocation;
+  @override
+  final String? city;
+  @override
+  final String? street;
+  @override
+  final int? number;
+  @override
+  final String? zipcode;
+
+  @override
+  String toString() {
+    return 'Address(geolocation: $geolocation, city: $city, street: $street, number: $number, zipcode: $zipcode)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Address &&
+            (identical(other.geolocation, geolocation) ||
+                other.geolocation == geolocation) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.street, street) || other.street == street) &&
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.zipcode, zipcode) || other.zipcode == zipcode));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, geolocation, city, street, number, zipcode);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AddressCopyWith<_$_Address> get copyWith =>
+      __$$_AddressCopyWithImpl<_$_Address>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_AddressToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Address implements Address {
+  const factory _Address(
+      {final Geolocation? geolocation,
+      final String? city,
+      final String? street,
+      final int? number,
+      final String? zipcode}) = _$_Address;
+
+  factory _Address.fromJson(Map<String, dynamic> json) = _$_Address.fromJson;
+
+  @override
+  Geolocation? get geolocation;
+  @override
+  String? get city;
+  @override
+  String? get street;
+  @override
+  int? get number;
+  @override
+  String? get zipcode;
+  @override
+  @JsonKey(ignore: true)
+  _$$_AddressCopyWith<_$_Address> get copyWith =>
       throw _privateConstructorUsedError;
 }
