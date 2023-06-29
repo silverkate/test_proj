@@ -13,6 +13,6 @@ class UserRepository {
         '/users/$id',
       )
           .then((value) {
-        return UserProfile.fromJson({'userName': 'test12'});
+        return UserProfile.fromJson(value.data);
       });
 }

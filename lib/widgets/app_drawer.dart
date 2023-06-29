@@ -10,8 +10,7 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = getIt<AuthBloc>();
-    final name = bloc.state.userProfile.userName ?? '';
+    final firstName = getIt<AuthBloc>().state.userProfile.name?.firstname ?? '';
 
     return Container(
       width: MediaQuery.of(context).size.width * 0.75,
@@ -40,7 +39,7 @@ class AppDrawer extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
                   child: Text(
-                    name,
+                    firstName,
                     style: const TextStyle(
                       color: AppColors.grey,
                     ),
