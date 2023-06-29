@@ -8,11 +8,11 @@ class UserRepository {
 
   UserRepository(this.httpClient);
 
-  Future<UserProfile?> getUserProfile(int id) => httpClient
-          .get(
-        '/users/$id',
-      )
-          .then((value) {
-        return UserProfile.fromJson(value.data);
-      });
+  Future<UserProfile?> getUserProfile(int id) async {
+    final value = await httpClient.get(
+      '/users/$id',
+    );
+
+    return UserProfile.fromJson(value.data);
+  }
 }
