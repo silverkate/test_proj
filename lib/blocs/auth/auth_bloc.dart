@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:injectable/injectable.dart';
-
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/repositories/index.dart';
 
@@ -37,9 +36,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     if (event.status == AuthenticationStatus.authenticated) {
       try {
-        final userProfile = await userRepository.getUserProfile();
+        final userProfile = await userRepository.getUserProfile(1);
 
-        emit(AuthState.authenticated(userProfile));
+        if (userProfile == null) {
+          emit(AuthState.unauthenticated());
+        } else {
+          emit(AuthState.authenticated(userProfile));
+        }
       } catch (_) {
         emit(AuthState.unauthenticated());
       }

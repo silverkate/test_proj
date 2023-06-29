@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:test_proj/blocs/index.dart';
 import 'package:test_proj/localization/index.dart';
 import 'package:test_proj/services/index.dart';
 import 'package:test_proj/styles/index.dart';
+import 'package:test_proj/widgets/app_drawer/app_drawer_menu_item.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final firstName = getIt<AuthBloc>().state.userProfile.name?.firstname ?? '';
+
     return Container(
       width: MediaQuery.of(context).size.width * 0.75,
       height: MediaQuery.of(context).size.height,
@@ -36,17 +37,26 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    firstName,
+                    style: const TextStyle(
+                      color: AppColors.grey,
+                    ),
+                  ),
+                ),
                 const Divider(height: 20),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
-                      buildMenuItem(
+                      AppDrawerMenuItem(
                         text: LocaleKeys.changePassword.tr(),
                         iconData: FontAwesomeIcons.lock,
                       ),
                       GestureDetector(
-                        child: buildMenuItem(
+                        child: AppDrawerMenuItem(
                           text: LocaleKeys.languageName.tr(),
                           iconData: FontAwesomeIcons.globe,
                         ),
@@ -60,7 +70,7 @@ class AppDrawer extends StatelessWidget {
                         },
                       ),
                       GestureDetector(
-                        child: buildMenuItem(
+                        child: AppDrawerMenuItem(
                           text: LocaleKeys.signOut.tr(),
                           iconData: FontAwesomeIcons.rightFromBracket,
                         ),
@@ -74,24 +84,6 @@ class AppDrawer extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildMenuItem({
-    required String text,
-    required IconData iconData,
-  }) {
-    return ListTile(
-      leading: Icon(
-        iconData,
-        color: AppColors.grey,
-      ),
-      title: Text(
-        text,
-        style: const TextStyle(
-          color: AppColors.grey,
         ),
       ),
     );

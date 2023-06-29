@@ -1,13 +1,15 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
-
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
+import 'package:test_proj/localization/index.dart';
 import 'package:test_proj/services/index.dart';
 import 'package:test_proj/styles/index.dart';
 import 'package:test_proj/widgets/index.dart';
+
 import 'login_form_bloc.dart';
 import 'widgets/index.dart';
 
@@ -30,6 +32,7 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
 
     return CustomFormBlocListener(
       formBloc: context.read<LoginFormBloc>(),
+      onFailure: _showError,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: Container(
@@ -65,6 +68,25 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _showError(BuildContext context, FormBlocState<dynamic, String> state) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: Text(LocaleKeys.error.tr()),
+        content: Text(state.error ?? ''),
+        actions: [
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            onPressed: () {
+              context.popRoute();
+            },
+            child: Text(LocaleKeys.ok.tr()),
+          ),
+        ],
       ),
     );
   }
