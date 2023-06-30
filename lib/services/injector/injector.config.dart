@@ -13,16 +13,16 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:test_proj/blocs/auth/auth_bloc.dart' as _i13;
 import 'package:test_proj/blocs/index.dart' as _i15;
-import 'package:test_proj/models/index.dart' as _i7;
 import 'package:test_proj/repositories/auth_repository.dart' as _i12;
 import 'package:test_proj/repositories/chats_repository.dart' as _i3;
 import 'package:test_proj/repositories/index.dart' as _i9;
 import 'package:test_proj/repositories/posts_repository.dart' as _i5;
+import 'package:test_proj/repositories/product_repository.dart' as _i6;
 import 'package:test_proj/repositories/user_repository.dart' as _i11;
 import 'package:test_proj/screens/home/messages/chats/bloc/chats_bloc.dart'
     as _i8;
 import 'package:test_proj/screens/home/messages/posts/posts_bloc.dart' as _i10;
-import 'package:test_proj/screens/home/products/products_bloc.dart' as _i6;
+import 'package:test_proj/screens/home/products/bloc/products_bloc.dart' as _i7;
 import 'package:test_proj/screens/login/login_form_bloc.dart' as _i14;
 import 'package:test_proj/services/http/http_client.dart' as _i4;
 
@@ -41,8 +41,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i3.ChatsRepository(gh<_i4.HttpClient>()));
     gh.factory<_i5.PostsRepository>(
         () => _i5.PostsRepository(gh<_i4.HttpClient>()));
-    gh.lazySingleton<_i6.ProductsBloc>(() => _i6.ProductsBloc(
-        gh<_i7.NetworkFilterableState<_i7.Product, List<_i7.Product>>>()));
+    gh.factory<_i6.ProductRepository>(
+        () => _i6.ProductRepository(gh<_i4.HttpClient>()));
+    gh.lazySingleton<_i7.ProductsBloc>(
+        () => _i7.ProductsBloc(repository: gh<_i6.ProductRepository>()));
     gh.lazySingleton<_i8.ChatsBloc>(
         () => _i8.ChatsBloc(repository: gh<_i9.ChatsRepository>()));
     gh.lazySingleton<_i10.PostsBloc>(
