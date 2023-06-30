@@ -14,7 +14,7 @@ class ProductsScreen extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    context.read<ProductsBloc>().add(const ProductsEvent.load());
+    context.read<ProductsBloc>().add(const ProductsEvent.loadProducts());
 
     return this;
   }
@@ -27,6 +27,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
   final _editingController = TextEditingController();
 
   Timer? _debouncer;
+
+  String? category;
+
+  final List<String> _categories = ['q', 'qq'];
 
   @override
   void dispose() {
@@ -44,7 +48,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       body: RefreshIndicator(
         onRefresh: () {
           final bloc = context.read<ProductsBloc>()
-            ..add(const ProductsEvent.load());
+            ..add(const ProductsEvent.loadProducts());
 
           return bloc.stream
               .firstWhere((state) => state.status != NetworkStatus.loading);
@@ -69,6 +73,26 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       ),
                     ),
                   ),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: DropdownButton<String?>(
+                  value: category,
+                  hint: const Text('Category'),
+                  items: _categories.map<DropdownMenuItem<String>>(
+                    (String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                        ),
+                      );
+                    },
+                  ).toList(),
+                  onChanged: _setNewCategory,
                 ),
               ),
             ),
@@ -115,5 +139,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
     _debouncer = Timer(const Duration(milliseconds: 500), () {
       context.read<ProductsBloc>().add(ProductsEvent.search(query));
     });
+  }
+
+  void _setNewCategory(String? newCategory) {
+    category = newCategory;
+    setState(() {});
   }
 }

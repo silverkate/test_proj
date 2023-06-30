@@ -9,13 +9,19 @@ class ProductsState with _$ProductsState {
     String? errorMessage,
   }) = _ProductsState;
 
-  factory ProductsState.success(
+  factory ProductsState.loadedProducts(
     List<Product> products,
-    List<String> categories,
   ) =>
       ProductsState(
         status: NetworkStatus.success,
         products: products,
+      );
+
+  factory ProductsState.loadedCategories(
+    List<String> categories,
+  ) =>
+      ProductsState(
+        status: NetworkStatus.success,
         categories: categories,
       );
 }
