@@ -15,6 +15,7 @@ class ProductsScreen extends StatefulWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     context.read<StxProductsBloc>().add(NetworkEventLoadAsync());
+    context.read<StxCategoriesBloc>().add(NetworkEventLoadAsync());
 
     return this;
   }
@@ -29,8 +30,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Timer? _debouncer;
 
   String? category;
-
-  final List<String> _categories = ['q', 'qq'];
 
   @override
   void dispose() {
@@ -79,20 +78,24 @@ class _ProductsScreenState extends State<ProductsScreen> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: DropdownButton<String?>(
-                  value: category,
-                  hint: Text(LocaleKeys.category.tr()),
-                  items: _categories.map<DropdownMenuItem<String>>(
-                    (String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                        ),
-                      );
-                    },
-                  ).toList(),
-                  onChanged: _setNewCategory,
+                child: BlocBuilder<StxCategoriesBloc, NetworkListState<String>>(
+                  builder: (context, state) {
+                    return DropdownButton<String?>(
+                      value: category,
+                      hint: Text(LocaleKeys.category.tr()),
+                      items: state.data.map<DropdownMenuItem<String>>(
+                        (String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                            ),
+                          );
+                        },
+                      ).toList(),
+                      onChanged: _setNewCategory,
+                    );
+                  },
                 ),
               ),
             ),

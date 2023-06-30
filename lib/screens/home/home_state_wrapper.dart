@@ -24,6 +24,9 @@ class HomeStateWrapper extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<StxProductsBloc>(),
         ),
+        BlocProvider(
+          create: (context) => getIt<StxCategoriesBloc>(),
+        ),
       ],
       child: child,
     );
