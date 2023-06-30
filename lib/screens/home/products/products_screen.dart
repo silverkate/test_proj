@@ -14,7 +14,7 @@ class ProductsScreen extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    context.read<ProductsBloc>().add(const ProductsEvent.loadProducts());
+    context.read<StxProductsBloc>().add(NetworkEventLoadAsync());
 
     return this;
   }
@@ -47,8 +47,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
       appBar: AppBar(title: Text(LocaleKeys.products.tr())),
       body: RefreshIndicator(
         onRefresh: () {
-          final bloc = context.read<ProductsBloc>()
-            ..add(const ProductsEvent.loadProducts());
+          final bloc = context.read<StxProductsBloc>()
+            ..add(NetworkEventLoadAsync());
 
           return bloc.stream
               .firstWhere((state) => state.status != NetworkStatus.loading);
@@ -96,7 +96,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 ),
               ),
             ),
-            BlocBuilder<ProductsBloc, ProductsState>(
+            BlocBuilder<StxProductsBloc, NetworkListState<Product>>(
               builder: (context, state) {
                 switch (state.status) {
                   case NetworkStatus.initial:
@@ -108,20 +108,20 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
-                          final product = state.products[index];
+                          final product = state.data[index];
 
                           return Padding(
                             padding: const EdgeInsets.all(8),
                             child: ProductWidget(product: product),
                           );
                         },
-                        childCount: state.products.length,
+                        childCount: state.data.length,
                       ),
                     );
 
                   case NetworkStatus.failure:
                     return SliverFillRemaining(
-                      child: Center(child: Text(state.errorMessage ?? '')),
+                      child: Center(child: Text(state.errorMsg ?? '')),
                     );
                 }
               },

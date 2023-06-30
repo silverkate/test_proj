@@ -11,19 +11,20 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:test_proj/blocs/auth/auth_bloc.dart' as _i13;
-import 'package:test_proj/blocs/index.dart' as _i15;
-import 'package:test_proj/repositories/auth_repository.dart' as _i12;
+import 'package:test_proj/blocs/auth/auth_bloc.dart' as _i14;
+import 'package:test_proj/blocs/index.dart' as _i16;
+import 'package:test_proj/repositories/auth_repository.dart' as _i13;
 import 'package:test_proj/repositories/chats_repository.dart' as _i3;
-import 'package:test_proj/repositories/index.dart' as _i9;
+import 'package:test_proj/repositories/index.dart' as _i10;
 import 'package:test_proj/repositories/posts_repository.dart' as _i5;
 import 'package:test_proj/repositories/product_repository.dart' as _i6;
-import 'package:test_proj/repositories/user_repository.dart' as _i11;
+import 'package:test_proj/repositories/user_repository.dart' as _i12;
 import 'package:test_proj/screens/home/messages/chats/bloc/chats_bloc.dart'
-    as _i8;
-import 'package:test_proj/screens/home/messages/posts/posts_bloc.dart' as _i10;
+    as _i9;
+import 'package:test_proj/screens/home/messages/posts/posts_bloc.dart' as _i11;
 import 'package:test_proj/screens/home/products/bloc/products_bloc.dart' as _i7;
-import 'package:test_proj/screens/login/login_form_bloc.dart' as _i14;
+import 'package:test_proj/screens/home/products/stx_products_bloc.dart' as _i8;
+import 'package:test_proj/screens/login/login_form_bloc.dart' as _i15;
 import 'package:test_proj/services/http/http_client.dart' as _i4;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -45,10 +46,12 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i6.ProductRepository(gh<_i4.HttpClient>()));
     gh.lazySingleton<_i7.ProductsBloc>(
         () => _i7.ProductsBloc(repository: gh<_i6.ProductRepository>()));
-    gh.lazySingleton<_i8.ChatsBloc>(
-        () => _i8.ChatsBloc(repository: gh<_i9.ChatsRepository>()));
-    gh.lazySingleton<_i10.PostsBloc>(
-        () => _i10.PostsBloc(gh<_i9.PostsRepository>()));
+    gh.lazySingleton<_i8.StxProductsBloc>(
+        () => _i8.StxProductsBloc(gh<_i6.ProductRepository>()));
+    gh.lazySingleton<_i9.ChatsBloc>(
+        () => _i9.ChatsBloc(repository: gh<_i10.ChatsRepository>()));
+    gh.lazySingleton<_i11.PostsBloc>(
+        () => _i11.PostsBloc(gh<_i10.PostsRepository>()));
     return this;
   }
 
@@ -59,17 +62,17 @@ extension GetItInjectableX on _i1.GetIt {
       dispose: dispose,
       init: (_i2.GetItHelper gh) {
         gh.singleton<_i4.HttpClient>(_i4.HttpClient());
-        gh.factory<_i11.UserRepository>(
-            () => _i11.UserRepository(gh<_i4.HttpClient>()));
-        gh.factory<_i12.AuthRepository>(
-            () => _i12.AuthRepository(gh<_i4.HttpClient>()));
-        gh.singleton<_i13.AuthBloc>(_i13.AuthBloc(
-          authRepository: gh<_i9.AuthRepository>(),
-          userRepository: gh<_i9.UserRepository>(),
+        gh.factory<_i12.UserRepository>(
+            () => _i12.UserRepository(gh<_i4.HttpClient>()));
+        gh.factory<_i13.AuthRepository>(
+            () => _i13.AuthRepository(gh<_i4.HttpClient>()));
+        gh.singleton<_i14.AuthBloc>(_i14.AuthBloc(
+          authRepository: gh<_i10.AuthRepository>(),
+          userRepository: gh<_i10.UserRepository>(),
         ));
-        gh.factory<_i14.LoginFormBloc>(() => _i14.LoginFormBloc(
-              authBloc: gh<_i15.AuthBloc>(),
-              repository: gh<_i12.AuthRepository>(),
+        gh.factory<_i15.LoginFormBloc>(() => _i15.LoginFormBloc(
+              authBloc: gh<_i16.AuthBloc>(),
+              repository: gh<_i13.AuthRepository>(),
             ));
       },
     );
