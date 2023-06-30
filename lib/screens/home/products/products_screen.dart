@@ -81,7 +81,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: DropdownButton<String?>(
                   value: category,
-                  hint: const Text('Category'),
+                  hint: Text(LocaleKeys.category.tr()),
                   items: _categories.map<DropdownMenuItem<String>>(
                     (String value) {
                       return DropdownMenuItem<String>(
