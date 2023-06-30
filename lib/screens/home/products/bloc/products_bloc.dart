@@ -25,9 +25,9 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     emit(state.copyWith(status: NetworkStatus.loading));
 
     try {
-      final chats = await repository.getProducts();
+      final products = await repository.getProducts();
 
-      emit(ProductsState.success(chats));
+      emit(ProductsState.success(products));
     } catch (_) {
       emit(state.copyWith(status: NetworkStatus.failure));
     }
@@ -37,9 +37,9 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     emit(state.copyWith(status: NetworkStatus.loading));
 
     try {
-      final chats = await repository.search(event.query);
+      final products = await repository.search(event.query);
 
-      emit(ProductsState.success(chats));
+      emit(ProductsState.success(products));
     } catch (_) {
       emit(state.copyWith(status: NetworkStatus.failure));
     }

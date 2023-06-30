@@ -33,4 +33,27 @@ class ProductRepository {
         )
         .toList();
   }
+
+  Future<List<String>> getCategories() async {
+    final categories = (await httpClient.get(
+      '/products/categories',
+    ))
+        .data as List<String>;
+
+    return categories;
+  }
+
+  Future<List<Product>> getProductsByCategory(String category) async {
+    final productsRaw = (await httpClient.get(
+      '/products',
+    ))
+        .data as List;
+
+    final products = productsRaw.map((e) => Product.fromJson(e)).toList();
+
+    return products
+        .where((element) =>
+            element.category?.toLowerCase() == category.toLowerCase())
+        .toList();
+  }
 }
