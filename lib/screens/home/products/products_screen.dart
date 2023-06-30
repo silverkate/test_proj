@@ -29,7 +29,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   Timer? _debouncer;
 
-  String? category;
+  ValueNotifier<String?> _category = ValueNotifier(null);
 
   @override
   void dispose() {
@@ -48,6 +48,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
         onRefresh: () {
           final bloc = context.read<StxProductsBloc>()
             ..add(NetworkEventLoadAsync());
+          _category.value = null;
 
           return bloc.stream
               .firstWhere((state) => state.status != NetworkStatus.loading);
@@ -80,20 +81,23 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: BlocBuilder<StxCategoriesBloc, NetworkListState<String>>(
                   builder: (context, state) {
-                    return DropdownButton<String?>(
-                      value: category,
-                      hint: Text(LocaleKeys.category.tr()),
-                      items: state.data.map<DropdownMenuItem<String>>(
-                        (String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                            ),
-                          );
-                        },
-                      ).toList(),
-                      onChanged: _setNewCategory,
+                    return ValueListenableBuilder(
+                      valueListenable: _category,
+                      builder: (_, category, __) => DropdownButton<String?>(
+                        value: category,
+                        hint: Text(LocaleKeys.category.tr()),
+                        items: state.data.map<DropdownMenuItem<String>>(
+                          (String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                              ),
+                            );
+                          },
+                        ).toList(),
+                        onChanged: _setNewCategory,
+                      ),
                     );
                   },
                 ),
@@ -136,16 +140,19 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   void _search(String query) {
+    _category.value = null;
+
     if (_debouncer?.isActive ?? false) {
       _debouncer?.cancel();
     }
     _debouncer = Timer(const Duration(milliseconds: 500), () {
-      context.read<StxProductsBloc>().add(NetworkEventSearchAsync(query));
+      context.read<StxProductsBloc>().search(query);
     });
   }
 
   void _setNewCategory(String? newCategory) {
-    category = newCategory;
-    setState(() {});
+    _category.value = newCategory;
+
+    context.read<StxProductsBloc>().filter(newCategory ?? '');
   }
 }
