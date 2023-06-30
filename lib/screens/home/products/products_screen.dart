@@ -43,7 +43,15 @@ class _ProductsScreenState extends State<ProductsScreen> {
     EasyLocalization.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(LocaleKeys.products.tr())),
+      appBar: AppBar(
+        title: Text(LocaleKeys.products.tr()),
+        actions: [
+          IconButton(
+            onPressed: _addElement,
+            icon: const Icon(Icons.add),
+          )
+        ],
+      ),
       body: RefreshIndicator(
         onRefresh: () {
           final bloc = context.read<StxProductsBloc>()
@@ -155,4 +163,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
     context.read<StxProductsBloc>().filter(newCategory ?? '');
   }
+
+  void _addElement() {}
 }
