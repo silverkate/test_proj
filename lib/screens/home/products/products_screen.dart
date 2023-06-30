@@ -54,12 +54,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () {
-          final bloc = context.read<StxProductsBloc>()
-            ..add(NetworkEventLoadAsync());
           _category.value = null;
+          _editingController.clear();
 
-          return bloc.stream
-              .firstWhere((state) => state.status != NetworkStatus.loading);
+          return context.read<StxProductsBloc>().loadAsyncFuture();
         },
         child: CustomScrollView(
           slivers: [
@@ -160,6 +158,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   void _setNewCategory(String? newCategory) {
     _category.value = newCategory;
+    _editingController.clear();
 
     context.read<StxProductsBloc>().filter(newCategory ?? '');
   }

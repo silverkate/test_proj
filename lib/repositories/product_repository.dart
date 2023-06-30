@@ -28,8 +28,7 @@ class ProductRepository {
     return products
         .where(
           (element) =>
-              element.title?.toLowerCase().contains(query.toLowerCase()) ??
-              false,
+              element.title.toLowerCase().contains(query.toLowerCase()),
         )
         .toList();
   }
@@ -47,18 +46,4 @@ class ProductRepository {
 
     return categories;
   }
-
-  // Future<List<Product>> getProductsByCategory(String category) async {
-  //   final productsRaw = (await httpClient.get(
-  //     '/products',
-  //   ))
-  //       .data as List;
-  //
-  //   final products = productsRaw.map((e) => Product.fromJson(e)).toList();
-  //
-  //   return products
-  //       .where((element) =>
-  //           element.category?.toLowerCase() == category.toLowerCase())
-  //       .toList();
-  // }
 }

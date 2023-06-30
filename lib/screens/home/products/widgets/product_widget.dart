@@ -12,8 +12,8 @@ class ProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(product.title ?? ''),
-      subtitle: Text(product.description ?? ''),
+      title: Text(product.title),
+      subtitle: Text(product.description),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

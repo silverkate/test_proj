@@ -47,7 +47,7 @@ class StxProductsBloc extends NetworkFilterableListBloc<
 
   /// Getting extras (i.e. categories in here).
   ///
-  /// However, there is another bloc for getting them ()
+  /// However, there is another bloc for getting them (StxCategoriesBloc).
   @override
   Future<List<String>> onLoadExtraAsync() {
     return repository.getCategories();
@@ -69,8 +69,7 @@ class StxProductsBloc extends NetworkFilterableListBloc<
       final filteredProducts = _data
           .where(
             (element) =>
-                element.title?.toLowerCase().contains(search.toLowerCase()) ??
-                false,
+                element.title.toLowerCase().contains(search.toLowerCase()),
           )
           .toList();
 
