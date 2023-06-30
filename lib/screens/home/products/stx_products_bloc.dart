@@ -6,9 +6,15 @@ import 'package:test_proj/repositories/product_repository.dart';
 // list bloc -> search bloc -> filterable bloc (firstly hardcode categories)
 
 @lazySingleton
-class StxProductsBloc
-    extends NetworkListBloc<Product, NetworkListState<Product>> {
-  StxProductsBloc(this.repository) : super(const NetworkListState(data: []));
+class StxProductsBloc extends NetworkSearchableListBloc<Product,
+    NetworkSearchableListState<Product>> {
+  StxProductsBloc(this.repository)
+      : super(
+          const NetworkSearchableListState(
+            data: [],
+            visibleData: [],
+          ),
+        );
 
   final ProductRepository repository;
 
@@ -20,5 +26,10 @@ class StxProductsBloc
   @override
   Future<List<Product>> onLoadAsync() {
     return repository.getProducts();
+  }
+
+  @override
+  Future<List<Product>> onSearchAsync(String query) {
+    return repository.search(query);
   }
 }

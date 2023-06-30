@@ -137,7 +137,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       _debouncer?.cancel();
     }
     _debouncer = Timer(const Duration(milliseconds: 500), () {
-      context.read<ProductsBloc>().add(ProductsEvent.search(query));
+      context.read<StxProductsBloc>().add(NetworkEventSearchAsync(query));
     });
   }
 
