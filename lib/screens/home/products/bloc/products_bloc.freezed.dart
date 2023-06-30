@@ -19,21 +19,18 @@ mixin _$ProductsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadProducts,
-    required TResult Function() loadCategories,
     required TResult Function(String query) search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadProducts,
-    TResult? Function()? loadCategories,
     TResult? Function(String query)? search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadProducts,
-    TResult Function()? loadCategories,
     TResult Function(String query)? search,
     required TResult orElse(),
   }) =>
@@ -41,21 +38,18 @@ mixin _$ProductsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadProducts value) loadProducts,
-    required TResult Function(_LoadCategories value) loadCategories,
     required TResult Function(_Search value) search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadProducts value)? loadProducts,
-    TResult? Function(_LoadCategories value)? loadCategories,
     TResult? Function(_Search value)? search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadProducts value)? loadProducts,
-    TResult Function(_LoadCategories value)? loadCategories,
     TResult Function(_Search value)? search,
     required TResult orElse(),
   }) =>
@@ -119,7 +113,6 @@ class _$_LoadProducts implements _LoadProducts {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadProducts,
-    required TResult Function() loadCategories,
     required TResult Function(String query) search,
   }) {
     return loadProducts();
@@ -129,7 +122,6 @@ class _$_LoadProducts implements _LoadProducts {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadProducts,
-    TResult? Function()? loadCategories,
     TResult? Function(String query)? search,
   }) {
     return loadProducts?.call();
@@ -139,7 +131,6 @@ class _$_LoadProducts implements _LoadProducts {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadProducts,
-    TResult Function()? loadCategories,
     TResult Function(String query)? search,
     required TResult orElse(),
   }) {
@@ -153,7 +144,6 @@ class _$_LoadProducts implements _LoadProducts {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadProducts value) loadProducts,
-    required TResult Function(_LoadCategories value) loadCategories,
     required TResult Function(_Search value) search,
   }) {
     return loadProducts(this);
@@ -163,7 +153,6 @@ class _$_LoadProducts implements _LoadProducts {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadProducts value)? loadProducts,
-    TResult? Function(_LoadCategories value)? loadCategories,
     TResult? Function(_Search value)? search,
   }) {
     return loadProducts?.call(this);
@@ -173,7 +162,6 @@ class _$_LoadProducts implements _LoadProducts {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadProducts value)? loadProducts,
-    TResult Function(_LoadCategories value)? loadCategories,
     TResult Function(_Search value)? search,
     required TResult orElse(),
   }) {
@@ -186,114 +174,6 @@ class _$_LoadProducts implements _LoadProducts {
 
 abstract class _LoadProducts implements ProductsEvent {
   const factory _LoadProducts() = _$_LoadProducts;
-}
-
-/// @nodoc
-abstract class _$$_LoadCategoriesCopyWith<$Res> {
-  factory _$$_LoadCategoriesCopyWith(
-          _$_LoadCategories value, $Res Function(_$_LoadCategories) then) =
-      __$$_LoadCategoriesCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_LoadCategoriesCopyWithImpl<$Res>
-    extends _$ProductsEventCopyWithImpl<$Res, _$_LoadCategories>
-    implements _$$_LoadCategoriesCopyWith<$Res> {
-  __$$_LoadCategoriesCopyWithImpl(
-      _$_LoadCategories _value, $Res Function(_$_LoadCategories) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_LoadCategories implements _LoadCategories {
-  const _$_LoadCategories();
-
-  @override
-  String toString() {
-    return 'ProductsEvent.loadCategories()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadCategories);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loadProducts,
-    required TResult Function() loadCategories,
-    required TResult Function(String query) search,
-  }) {
-    return loadCategories();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadProducts,
-    TResult? Function()? loadCategories,
-    TResult? Function(String query)? search,
-  }) {
-    return loadCategories?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadProducts,
-    TResult Function()? loadCategories,
-    TResult Function(String query)? search,
-    required TResult orElse(),
-  }) {
-    if (loadCategories != null) {
-      return loadCategories();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_LoadProducts value) loadProducts,
-    required TResult Function(_LoadCategories value) loadCategories,
-    required TResult Function(_Search value) search,
-  }) {
-    return loadCategories(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadProducts value)? loadProducts,
-    TResult? Function(_LoadCategories value)? loadCategories,
-    TResult? Function(_Search value)? search,
-  }) {
-    return loadCategories?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadProducts value)? loadProducts,
-    TResult Function(_LoadCategories value)? loadCategories,
-    TResult Function(_Search value)? search,
-    required TResult orElse(),
-  }) {
-    if (loadCategories != null) {
-      return loadCategories(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadCategories implements ProductsEvent {
-  const factory _LoadCategories() = _$_LoadCategories;
 }
 
 /// @nodoc
@@ -359,7 +239,6 @@ class _$_Search implements _Search {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadProducts,
-    required TResult Function() loadCategories,
     required TResult Function(String query) search,
   }) {
     return search(query);
@@ -369,7 +248,6 @@ class _$_Search implements _Search {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadProducts,
-    TResult? Function()? loadCategories,
     TResult? Function(String query)? search,
   }) {
     return search?.call(query);
@@ -379,7 +257,6 @@ class _$_Search implements _Search {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadProducts,
-    TResult Function()? loadCategories,
     TResult Function(String query)? search,
     required TResult orElse(),
   }) {
@@ -393,7 +270,6 @@ class _$_Search implements _Search {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadProducts value) loadProducts,
-    required TResult Function(_LoadCategories value) loadCategories,
     required TResult Function(_Search value) search,
   }) {
     return search(this);
@@ -403,7 +279,6 @@ class _$_Search implements _Search {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadProducts value)? loadProducts,
-    TResult? Function(_LoadCategories value)? loadCategories,
     TResult? Function(_Search value)? search,
   }) {
     return search?.call(this);
@@ -413,7 +288,6 @@ class _$_Search implements _Search {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadProducts value)? loadProducts,
-    TResult Function(_LoadCategories value)? loadCategories,
     TResult Function(_Search value)? search,
     required TResult orElse(),
   }) {

@@ -16,12 +16,4 @@ class ProductsState with _$ProductsState {
         status: NetworkStatus.success,
         products: products,
       );
-
-  factory ProductsState.loadedCategories(
-    List<String> categories,
-  ) =>
-      ProductsState(
-        status: NetworkStatus.success,
-        categories: categories,
-      );
 }

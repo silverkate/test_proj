@@ -29,7 +29,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   Timer? _debouncer;
 
-  ValueNotifier<String?> _category = ValueNotifier(null);
+  final ValueNotifier<String?> _category = ValueNotifier(null);
 
   @override
   void dispose() {
@@ -128,7 +128,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
                   case NetworkStatus.failure:
                     return SliverFillRemaining(
-                      child: Center(child: Text(state.errorMsg ?? '')),
+                      child: Center(child: Text(state.errorMsg)),
                     );
                 }
               },
