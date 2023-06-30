@@ -2,16 +2,21 @@ import 'package:injectable/injectable.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/repositories/product_repository.dart';
 
-/// String -> category
-@lazySingleton
-class StxProductsBloc extends NetworkFilterableListBloc<
-        Product,
-        String,
-//
+/// Generic types:
 // T - data
 // F - filter
 // S - state
 // E - extra
+
+/// String -> category
+@lazySingleton
+class StxProductsBloc extends NetworkFilterableListBloc<
+
+        /// Products is what we display in the list and work with.
+        Product,
+
+        /// Type of extra (List of categories, where category is a String)
+        String,
         NetworkFilterableExtraListState<Product, String, List<String>>>
     with
         NetworkExtraBaseMixin<List<Product>, List<String>,
@@ -21,33 +26,31 @@ class StxProductsBloc extends NetworkFilterableListBloc<
           const NetworkFilterableExtraListState(
             data: [],
 
-            /// [visibleData] is what is displayed on the screen
+            /// [visibleData] is what is displayed on the screen.
             visibleData: [],
 
-            /// [extraData] is categories по яким ми фільтруємо
+            /// [extraData] is categories on which we are filtering data.
             extraData: [],
           ),
         );
 
   final ProductRepository repository;
 
+  /// List of the data after the loading.
   List<Product> _data = [];
 
+  /// Getting the list of products to display.
   @override
   Future<List<Product>> onLoadAsync() {
     return repository.getProducts();
   }
 
-  /// getting extra (categories)
+  /// Getting extras (i.e. categories in here).
+  ///
+  /// However, there is another bloc for getting them ()
   @override
   Future<List<String>> onLoadExtraAsync() {
     return repository.getCategories();
-  }
-
-  /// both data and extra
-  @override
-  void loadWithExtra() {
-    super.loadWithExtra();
   }
 
   /// Is called before [state] is emitted.
