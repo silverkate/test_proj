@@ -309,6 +309,7 @@ abstract class _Search implements ProductsEvent {
 mixin _$ProductsState {
   NetworkStatus get status => throw _privateConstructorUsedError;
   List<Product> get products => throw _privateConstructorUsedError;
+  List<String> get categories => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -323,7 +324,10 @@ abstract class $ProductsStateCopyWith<$Res> {
       _$ProductsStateCopyWithImpl<$Res, ProductsState>;
   @useResult
   $Res call(
-      {NetworkStatus status, List<Product> products, String? errorMessage});
+      {NetworkStatus status,
+      List<Product> products,
+      List<String> categories,
+      String? errorMessage});
 }
 
 /// @nodoc
@@ -341,6 +345,7 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
   $Res call({
     Object? status = null,
     Object? products = null,
+    Object? categories = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
@@ -352,6 +357,10 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as List<Product>,
+      categories: null == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -369,7 +378,10 @@ abstract class _$$_ProductsStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {NetworkStatus status, List<Product> products, String? errorMessage});
+      {NetworkStatus status,
+      List<Product> products,
+      List<String> categories,
+      String? errorMessage});
 }
 
 /// @nodoc
@@ -385,6 +397,7 @@ class __$$_ProductsStateCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? products = null,
+    Object? categories = null,
     Object? errorMessage = freezed,
   }) {
     return _then(_$_ProductsState(
@@ -396,6 +409,10 @@ class __$$_ProductsStateCopyWithImpl<$Res>
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
               as List<Product>,
+      categories: null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       errorMessage: freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -410,8 +427,10 @@ class _$_ProductsState implements _ProductsState {
   const _$_ProductsState(
       {this.status = NetworkStatus.loading,
       final List<Product> products = const [],
+      final List<String> categories = const [],
       this.errorMessage})
-      : _products = products;
+      : _products = products,
+        _categories = categories;
 
   @override
   @JsonKey()
@@ -425,12 +444,21 @@ class _$_ProductsState implements _ProductsState {
     return EqualUnmodifiableListView(_products);
   }
 
+  final List<String> _categories;
+  @override
+  @JsonKey()
+  List<String> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
   @override
   final String? errorMessage;
 
   @override
   String toString() {
-    return 'ProductsState(status: $status, products: $products, errorMessage: $errorMessage)';
+    return 'ProductsState(status: $status, products: $products, categories: $categories, errorMessage: $errorMessage)';
   }
 
   @override
@@ -440,13 +468,19 @@ class _$_ProductsState implements _ProductsState {
             other is _$_ProductsState &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status,
-      const DeepCollectionEquality().hash(_products), errorMessage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      status,
+      const DeepCollectionEquality().hash(_products),
+      const DeepCollectionEquality().hash(_categories),
+      errorMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -459,12 +493,15 @@ abstract class _ProductsState implements ProductsState {
   const factory _ProductsState(
       {final NetworkStatus status,
       final List<Product> products,
+      final List<String> categories,
       final String? errorMessage}) = _$_ProductsState;
 
   @override
   NetworkStatus get status;
   @override
   List<Product> get products;
+  @override
+  List<String> get categories;
   @override
   String? get errorMessage;
   @override

@@ -35,10 +35,15 @@ class ProductRepository {
   }
 
   Future<List<String>> getCategories() async {
-    final categories = (await httpClient.get(
+    final categoriesRaw = await httpClient.get(
       '/products/categories',
-    ))
-        .data as List<String>;
+    );
+
+    final categories = (categoriesRaw.data as List)
+        .map(
+          (e) => e.toString(),
+        )
+        .toList();
 
     return categories;
   }

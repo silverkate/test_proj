@@ -21,13 +21,16 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
   final ProductRepository repository;
 
+  var _categories = <String>[];
+
   FutureOr<void> _load(_Load event, Emitter<ProductsState> emit) async {
     emit(state.copyWith(status: NetworkStatus.loading));
 
     try {
       final products = await repository.getProducts();
+      _categories = await repository.getCategories();
 
-      emit(ProductsState.success(products));
+      emit(ProductsState.success(products, _categories));
     } catch (_) {
       emit(state.copyWith(status: NetworkStatus.failure));
     }
@@ -39,7 +42,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     try {
       final products = await repository.search(event.query);
 
-      emit(ProductsState.success(products));
+      emit(ProductsState.success(products, _categories));
     } catch (_) {
       emit(state.copyWith(status: NetworkStatus.failure));
     }
