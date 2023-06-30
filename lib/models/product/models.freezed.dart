@@ -20,10 +20,13 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Product {
-  int get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError; //
+  String get title =>
+      throw _privateConstructorUsedError; // text input - keywordType - textfield, only digits - mask (via constructor), keyboard type, not more than 3 symbols
+  double get price =>
+      throw _privateConstructorUsedError; // not text input - textAreaInput (max lines - 4 lines),
+  String get description =>
+      throw _privateConstructorUsedError; // dropdown - options from category bloc, SingleSelectFormBuilder - create such separate widget with SelectFieldBloc
   String get category => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   Rating? get rating => throw _privateConstructorUsedError;
@@ -205,15 +208,19 @@ class _$_Product implements _Product {
   @override
   @JsonKey()
   final int id;
+//
   @override
   @JsonKey()
   final String title;
+// text input - keywordType - textfield, only digits - mask (via constructor), keyboard type, not more than 3 symbols
   @override
   @JsonKey()
   final double price;
+// not text input - textAreaInput (max lines - 4 lines),
   @override
   @JsonKey()
   final String description;
+// dropdown - options from category bloc, SingleSelectFormBuilder - create such separate widget with SelectFieldBloc
   @override
   @JsonKey()
   final String category;
@@ -277,13 +284,13 @@ abstract class _Product implements Product {
 
   @override
   int get id;
-  @override
+  @override //
   String get title;
-  @override
+  @override // text input - keywordType - textfield, only digits - mask (via constructor), keyboard type, not more than 3 symbols
   double get price;
-  @override
+  @override // not text input - textAreaInput (max lines - 4 lines),
   String get description;
-  @override
+  @override // dropdown - options from category bloc, SingleSelectFormBuilder - create such separate widget with SelectFieldBloc
   String get category;
   @override
   String get image;

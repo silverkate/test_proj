@@ -102,3 +102,5 @@ class StxProductsBloc extends NetworkFilterableListBloc<
     return item1.title == item2.title;
   }
 }
+
+// c

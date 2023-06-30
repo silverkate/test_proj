@@ -35,7 +35,10 @@ class AppRouter extends $AppRouter {
                 AutoRoute(page: SettingsRoute.page),
               ],
             ),
+
+            /// if we show above the page, we need to register this way
             AutoRoute(page: ChatDetailsRoute.page),
+            AutoRoute(page: EditProductRoute.page),
           ],
         ),
       ],
