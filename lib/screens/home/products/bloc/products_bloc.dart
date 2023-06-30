@@ -16,6 +16,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     required this.repository,
   }) : super(const ProductsState()) {
     on<_Load>(_load);
+    on<_Search>(_search);
   }
 
   final ProductRepository repository;
@@ -25,6 +26,18 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
     try {
       final chats = await repository.getProducts();
+
+      emit(ProductsState.success(chats));
+    } catch (_) {
+      emit(state.copyWith(status: NetworkStatus.failure));
+    }
+  }
+
+  FutureOr<void> _search(_Search event, Emitter<ProductsState> emit) async {
+    emit(state.copyWith(status: NetworkStatus.loading));
+
+    try {
+      final chats = await repository.search(event.query);
 
       emit(ProductsState.success(chats));
     } catch (_) {

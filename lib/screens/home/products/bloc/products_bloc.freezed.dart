@@ -19,32 +19,38 @@ mixin _$ProductsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(String query) search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
+    TResult? Function(String query)? search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(String query)? search,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
+    required TResult Function(_Search value) search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Load value)? load,
+    TResult? Function(_Search value)? search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -105,6 +111,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(String query) search,
   }) {
     return load();
   }
@@ -113,6 +120,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
+    TResult? Function(String query)? search,
   }) {
     return load?.call();
   }
@@ -121,6 +129,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(String query)? search,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -133,6 +142,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
+    required TResult Function(_Search value) search,
   }) {
     return load(this);
   }
@@ -141,6 +151,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Load value)? load,
+    TResult? Function(_Search value)? search,
   }) {
     return load?.call(this);
   }
@@ -149,6 +160,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -160,6 +172,137 @@ class _$_Load implements _Load {
 
 abstract class _Load implements ProductsEvent {
   const factory _Load() = _$_Load;
+}
+
+/// @nodoc
+abstract class _$$_SearchCopyWith<$Res> {
+  factory _$$_SearchCopyWith(_$_Search value, $Res Function(_$_Search) then) =
+      __$$_SearchCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String query});
+}
+
+/// @nodoc
+class __$$_SearchCopyWithImpl<$Res>
+    extends _$ProductsEventCopyWithImpl<$Res, _$_Search>
+    implements _$$_SearchCopyWith<$Res> {
+  __$$_SearchCopyWithImpl(_$_Search _value, $Res Function(_$_Search) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? query = null,
+  }) {
+    return _then(_$_Search(
+      null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Search implements _Search {
+  const _$_Search(this.query);
+
+  @override
+  final String query;
+
+  @override
+  String toString() {
+    return 'ProductsEvent.search(query: $query)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Search &&
+            (identical(other.query, query) || other.query == query));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, query);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SearchCopyWith<_$_Search> get copyWith =>
+      __$$_SearchCopyWithImpl<_$_Search>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(String query) search,
+  }) {
+    return search(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function(String query)? search,
+  }) {
+    return search?.call(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(String query)? search,
+    required TResult orElse(),
+  }) {
+    if (search != null) {
+      return search(query);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Load value) load,
+    required TResult Function(_Search value) search,
+  }) {
+    return search(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Load value)? load,
+    TResult? Function(_Search value)? search,
+  }) {
+    return search?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Load value)? load,
+    TResult Function(_Search value)? search,
+    required TResult orElse(),
+  }) {
+    if (search != null) {
+      return search(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Search implements ProductsEvent {
+  const factory _Search(final String query) = _$_Search;
+
+  String get query;
+  @JsonKey(ignore: true)
+  _$$_SearchCopyWith<_$_Search> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

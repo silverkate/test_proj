@@ -11,3 +11,6 @@
 //     return Product();
 //   }
 // }
+
+//
+// list bloc -> serch bloc -> filterable bloc (firstly hardcode categories)
