@@ -19,8 +19,8 @@ class EditProductFormBloc extends FormBloc<String, String> {
     required this.categoriesBloc,
     @factoryParam this.product,
   }) : super(
-          /// If [customSubmit] - true, we need to manually handle progresses and
-          /// success, error emits.
+          /// If [customSubmit] - true, we need to manually handle progresses
+          /// and success, error emits.
           customSubmit: false,
           isEditing: product != null,
         ) {
