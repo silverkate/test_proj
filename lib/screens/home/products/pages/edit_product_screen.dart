@@ -84,6 +84,22 @@ class EditProductScreen extends StatelessWidget implements AutoRouteWrapper {
     BuildContext context,
     FormBlocState<dynamic, String> state,
   ) {
+    final productsBloc = context.read<StxProductsBloc>();
+    final formBloc = context.read<EditProductFormBloc>();
+
+    if (state.isEditing) {
+      //productsBloc.editItem(updatedItem);
+    } else {
+      final product = Product(
+        title: formBloc.title.value ?? '',
+        description: formBloc.description.value ?? '',
+        category: formBloc.category.value ?? '',
+        price: formBloc.price.valueToDouble ?? 0.0,
+      );
+
+      productsBloc.addItem(product);
+    }
+
     // submit success
     // -> if state is create/edit product, then products bloc.add item state.response cast to product
     // if edit -> edit item

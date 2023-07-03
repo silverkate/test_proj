@@ -13,7 +13,6 @@ import 'dart:async';
 import 'package:injectable/injectable.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 import 'package:test_proj/blocs/index.dart';
-import 'package:test_proj/models/index.dart';
 
 @Injectable(scope: 'auth')
 class EditProductFormBloc extends FormBloc<String, String> {
@@ -26,11 +25,9 @@ class EditProductFormBloc extends FormBloc<String, String> {
 
   EditProductFormBloc({
     required this.productsBloc,
-    // nullable product if null - create
   }) : super(
-    customSubmit: false,
-    isEditing:,
-  ) {
+          customSubmit: false,
+        ) {
     //, isEditing: initial != null) {
     // customSubmit - loading handling - emitSuccess, emitFailure
     title = TextFieldBloc(
@@ -58,7 +55,6 @@ class EditProductFormBloc extends FormBloc<String, String> {
     );
 
     addFields([
-
       /// Only this fields are to be validated on submit.
       title,
       description,
@@ -78,19 +74,6 @@ class EditProductFormBloc extends FormBloc<String, String> {
   @override
   Future<FutureOr<void>> onSubmit() async {
     try {
-      if (state.isEditing) {
-        //productsBloc.editItem(updatedItem);
-      } else {
-        final product = Product(
-          title: title.value ?? '',
-          description: description.value ?? '',
-          category: category.value ?? '',
-          price: price.valueToDouble ?? 0.0,
-        );
-        productsBloc.addItem(product);
-      }
-
-
       emitSuccess('Success');
     } catch (error, stacktrace) {
       addError(error, stacktrace);
