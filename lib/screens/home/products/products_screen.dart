@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_proj/blocs/index.dart';
@@ -27,14 +25,9 @@ class ProductsScreen extends StatefulWidget implements AutoRouteWrapper {
 class _ProductsScreenState extends State<ProductsScreen> {
   final _editingController = TextEditingController();
 
-  Timer? _debouncer;
-
-  final ValueNotifier<String?> _category = ValueNotifier(null);
-
   @override
   void dispose() {
     _editingController.dispose();
-    _debouncer?.cancel();
     super.dispose();
   }
 
@@ -54,7 +47,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () {
-          _category.value = null;
           _editingController.clear();
 
           return context.read<StxProductsBloc>().loadAsyncFuture();
@@ -85,25 +77,26 @@ class _ProductsScreenState extends State<ProductsScreen> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: BlocBuilder<StxCategoriesBloc, NetworkListState<String>>(
+                child: BlocBuilder<StxCategoriesBloc,
+                    NetworkFilterableState<List<String>, String?>>(
+                  buildWhen: (previous, current) =>
+                      previous.filter != current.filter ||
+                      previous.data != current.data,
                   builder: (context, state) {
-                    return ValueListenableBuilder(
-                      valueListenable: _category,
-                      builder: (_, category, __) => DropdownButton<String?>(
-                        value: category,
-                        hint: Text(LocaleKeys.category.tr()),
-                        items: state.data.map<DropdownMenuItem<String>>(
-                          (String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                              ),
-                            );
-                          },
-                        ).toList(),
-                        onChanged: _setNewCategory,
-                      ),
+                    return DropdownButton<String?>(
+                      value: state.filter,
+                      hint: Text(LocaleKeys.category.tr()),
+                      items: state.data.map<DropdownMenuItem<String>>(
+                        (String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                            ),
+                          );
+                        },
+                      ).toList(),
+                      onChanged: _setNewCategory,
                     );
                   },
                 ),
@@ -146,18 +139,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   void _search(String query) {
-    _category.value = null;
-
-    if (_debouncer?.isActive ?? false) {
-      _debouncer?.cancel();
-    }
-    _debouncer = Timer(const Duration(milliseconds: 500), () {
-      context.read<StxProductsBloc>().search(query);
-    });
+    context.read<StxCategoriesBloc>().filter(null);
+    context.read<StxProductsBloc>().search(query);
   }
 
   void _setNewCategory(String? newCategory) {
-    _category.value = newCategory;
+    context.read<StxCategoriesBloc>().filter(newCategory);
     _editingController.clear();
 
     context.read<StxProductsBloc>().filter(newCategory ?? '');
