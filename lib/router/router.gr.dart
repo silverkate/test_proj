@@ -109,7 +109,7 @@ abstract class $AppRouter extends _i13.RootStackRouter {
     CartsRoute.name: (routeData) {
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.CartsScreen(),
+        child: _i13.WrappedRoute(child: const _i12.CartsScreen()),
       );
     },
   };
