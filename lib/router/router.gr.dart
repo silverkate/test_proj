@@ -106,10 +106,11 @@ abstract class $AppRouter extends _i13.RootStackRouter {
           orElse: () => const EditProductRouteArgs());
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i12.EditProductScreen(
+        child: _i13.WrappedRoute(
+            child: _i12.EditProductScreen(
           product: args.product,
           key: args.key,
-        ),
+        )),
       );
     },
   };

@@ -36,7 +36,8 @@ class AppRouter extends $AppRouter {
               ],
             ),
 
-            /// if we show above the page, we need to register this way
+            /// To show the page above all the nested ones, register them
+            /// outside of them all.
             AutoRoute(page: ChatDetailsRoute.page),
             AutoRoute(page: EditProductRoute.page),
           ],

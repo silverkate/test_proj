@@ -33,7 +33,6 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
     return CustomFormBlocListener(
       formBloc: context.read<LoginFormBloc>(),
       onFailure: _showError,
-      onSuccess: _qq,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: Container(
@@ -90,12 +89,5 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
         ],
       ),
     );
-  }
-
-  void _qq(BuildContext context, FormBlocState<dynamic, String> state) {
-    // submit success
-    // -> if state is create/edit product, then products bloc.add item state.response cast to product
-    // if edit -> edit item
-    // pop / navigate back
   }
 }
