@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:injectable/injectable.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/repositories/product_repository.dart';
@@ -91,6 +93,7 @@ class StxProductsBloc extends NetworkFilterableListBloc<
         visibleData: filteredProducts,
         extraData: const [],
         status: NetworkStatus.success,
+        filter: state.filter,
       );
     }
 
