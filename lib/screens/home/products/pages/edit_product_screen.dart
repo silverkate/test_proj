@@ -56,9 +56,8 @@ class EditProductScreen extends StatelessWidget implements AutoRouteWrapper {
                   maxLines: 4,
                   fieldBloc: formBloc.description,
                 ),
-                TextInputFormBuilder(
+                DropDownFormBuilder(
                   label: 'Category',
-                  hintText: 'Category',
                   fieldBloc: formBloc.category,
                 ),
                 TextInputFormBuilder(

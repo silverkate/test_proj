@@ -73,7 +73,7 @@ extension GetItInjectableX on _i1.GetIt {
           _,
         ) =>
             _i13.EditProductFormBloc(
-              productsBloc: gh<_i15.StxProductsBloc>(),
+              categoriesBloc: gh<_i15.StxCategoriesBloc>(),
               product: product,
             ));
         gh.singleton<_i4.HttpClient>(_i4.HttpClient());

@@ -10,13 +10,13 @@ class EditProductFormBloc extends FormBloc<String, String> {
   late TextFieldBloc title;
   late TextFieldBloc description;
   late TextFieldBloc price;
-  late TextFieldBloc category;
+  late SelectFieldBloc<String> category;
 
-  final StxProductsBloc productsBloc;
+  final StxCategoriesBloc categoriesBloc;
   final Product? product;
 
   EditProductFormBloc({
-    required this.productsBloc,
+    required this.categoriesBloc,
     @factoryParam this.product,
   }) : super(
           /// If [customSubmit] - true, we need to manually handle progresses and
@@ -44,12 +44,16 @@ class EditProductFormBloc extends FormBloc<String, String> {
       rules: {ValidationType.onBlur},
     );
 
-    category = TextFieldBloc(
+    final categories = categoriesBloc.state.data;
+
+    category = SelectFieldBloc(
       initialValue: product?.category,
       required: true, // is the same as FieldBlocValidators.required
       customValidators: {FieldBlocValidators.requiredValidator},
       rules: {ValidationType.onBlur},
-    );
+    )
+      ..addOptions(categories)
+      ..value = product?.category;
 
     addFields([
       /// Only this fields are to be validated on submit.
@@ -62,8 +66,6 @@ class EditProductFormBloc extends FormBloc<String, String> {
 
   @override
   FutureOr<void> onInitialize(Map<String, dynamic> params) {
-    // get categories when opening modal screen
-
     return super.onInitialize(params);
   }
 
