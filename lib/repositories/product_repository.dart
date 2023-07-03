@@ -9,12 +9,9 @@ class ProductRepository {
   ProductRepository(this.httpClient);
 
   Future<List<Product>> getProducts() async {
-    final products = (await httpClient.get(
-      '/products',
-    ))
-        .data as List;
+    final response = await httpClient.get('/products');
 
-    return products.map((e) => Product.fromJson(e)).toList();
+    return (response.data as List).map((x) => Product.fromJson(x)).toList();
   }
 
   Future<List<Product>> search(String query) async {

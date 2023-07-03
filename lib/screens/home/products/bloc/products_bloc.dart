@@ -12,14 +12,14 @@ part 'products_state.dart';
 
 @lazySingleton
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
+  final ProductRepository repository;
+
   ProductsBloc({
     required this.repository,
   }) : super(const ProductsState()) {
     on<_LoadProducts>(_loadProducts);
     on<_Search>(_search);
   }
-
-  final ProductRepository repository;
 
   FutureOr<void> _loadProducts(
     _LoadProducts event,
