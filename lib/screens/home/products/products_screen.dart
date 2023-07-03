@@ -157,7 +157,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   void _addElement() {
     context.router.push(
-      EditProductRoute(),
+      ProductModalRoute(),
     );
   }
 }

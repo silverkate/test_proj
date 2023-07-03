@@ -24,7 +24,7 @@ import 'package:test_proj/screens/home/messages/chats/bloc/chats_bloc.dart'
     as _i10;
 import 'package:test_proj/screens/home/messages/posts/posts_bloc.dart' as _i12;
 import 'package:test_proj/screens/home/products/bloc/products_bloc.dart' as _i7;
-import 'package:test_proj/screens/home/products/pages/edit_product_form_bloc.dart'
+import 'package:test_proj/screens/home/products/pages/product_modal_form_bloc.dart'
     as _i13;
 import 'package:test_proj/screens/home/products/stx_categories_bloc.dart'
     as _i8;
@@ -68,15 +68,16 @@ extension GetItInjectableX on _i1.GetIt {
       'auth',
       dispose: dispose,
       init: (_i2.GetItHelper gh) {
-        gh.factoryParam<_i13.EditProductFormBloc, _i14.Product?, dynamic>((
+        gh.singleton<_i4.HttpClient>(_i4.HttpClient());
+        gh.factoryParam<_i13.ProductModalFormBloc, _i14.Product?, dynamic>((
           product,
           _,
         ) =>
-            _i13.EditProductFormBloc(
+            _i13.ProductModalFormBloc(
               categoriesBloc: gh<_i15.StxCategoriesBloc>(),
+              productsBloc: gh<_i15.StxProductsBloc>(),
               product: product,
             ));
-        gh.singleton<_i4.HttpClient>(_i4.HttpClient());
         gh.factory<_i16.UserRepository>(
             () => _i16.UserRepository(gh<_i4.HttpClient>()));
         gh.factory<_i17.AuthRepository>(

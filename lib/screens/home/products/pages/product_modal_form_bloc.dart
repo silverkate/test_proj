@@ -6,17 +6,20 @@ import 'package:test_proj/blocs/index.dart';
 import 'package:test_proj/models/index.dart';
 
 @Injectable(scope: 'auth')
-class EditProductFormBloc extends FormBloc<String, String> {
+class ProductModalFormBloc extends FormBloc<String, String> {
+  final Product? product;
+
   late TextFieldBloc title;
   late TextFieldBloc description;
   late TextFieldBloc price;
   late SelectFieldBloc<String> category;
 
   final StxCategoriesBloc categoriesBloc;
-  final Product? product;
+  final StxProductsBloc productsBloc;
 
-  EditProductFormBloc({
+  ProductModalFormBloc({
     required this.categoriesBloc,
+    required this.productsBloc,
     @factoryParam this.product,
   }) : super(
           /// If [customSubmit] - true, we need to manually handle progresses
@@ -48,12 +51,12 @@ class EditProductFormBloc extends FormBloc<String, String> {
 
     category = SelectFieldBloc(
       initialValue: product?.category,
-      required: true, // is the same as FieldBlocValidators.required
+      required: true,
+      // is the same as FieldBlocValidators.required
       customValidators: {FieldBlocValidators.requiredValidator},
       rules: {ValidationType.onBlur},
-    )
-      ..addOptions(categories)
-      ..value = product?.category;
+      options: categories,
+    )..value = product?.category;
 
     addFields([
       /// Only this fields are to be validated on submit.
@@ -66,8 +69,29 @@ class EditProductFormBloc extends FormBloc<String, String> {
 
   /// Is executed when we call submit from screen.
   @override
-  Future<FutureOr<void>> onSubmit() async {
+  FutureOr<void> onSubmit() {
     try {
+      if (state.isEditing) {
+        final editedProduct = product?.copyWith(
+              title: title.value ?? '',
+              description: description.value ?? '',
+              category: category.value ?? '',
+              price: price.valueToDouble ?? 0.0,
+            ) ??
+            const Product();
+
+        productsBloc.editItem(editedProduct);
+      } else {
+        final product = Product(
+          title: title.value ?? '',
+          description: description.value ?? '',
+          category: category.value ?? '',
+          price: price.valueToDouble ?? 0.0,
+        );
+
+        productsBloc.addItem(product);
+      }
+
       emitSuccess('Success');
     } catch (error, stacktrace) {
       addError(error, stacktrace);

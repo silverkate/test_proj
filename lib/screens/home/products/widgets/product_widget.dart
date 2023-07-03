@@ -39,7 +39,7 @@ class ProductWidget extends StatelessWidget {
 
   void _editItem(BuildContext context) {
     context.router.push(
-      EditProductRoute(product: product),
+      ProductModalRoute(product: product),
     );
   }
 }

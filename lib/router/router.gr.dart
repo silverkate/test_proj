@@ -20,7 +20,7 @@ import 'package:test_proj/screens/home/messages/chats/pages/chat_details/chat_de
     as _i5;
 import 'package:test_proj/screens/home/messages/messages_screen.dart' as _i3;
 import 'package:test_proj/screens/home/messages/posts/posts_screen.dart' as _i2;
-import 'package:test_proj/screens/home/products/pages/edit_product_screen.dart'
+import 'package:test_proj/screens/home/products/pages/product_modal_screen.dart'
     as _i12;
 import 'package:test_proj/screens/home/products/products_screen.dart' as _i11;
 import 'package:test_proj/screens/home/settings/settings_screen.dart' as _i1;
@@ -101,13 +101,13 @@ abstract class $AppRouter extends _i13.RootStackRouter {
         child: _i13.WrappedRoute(child: const _i11.ProductsScreen()),
       );
     },
-    EditProductRoute.name: (routeData) {
-      final args = routeData.argsAs<EditProductRouteArgs>(
-          orElse: () => const EditProductRouteArgs());
+    ProductModalRoute.name: (routeData) {
+      final args = routeData.argsAs<ProductModalRouteArgs>(
+          orElse: () => const ProductModalRouteArgs());
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i13.WrappedRoute(
-            child: _i12.EditProductScreen(
+            child: _i12.ProductModalScreen(
           product: args.product,
           key: args.key,
         )),
@@ -295,29 +295,29 @@ class ProductsRoute extends _i13.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.EditProductScreen]
-class EditProductRoute extends _i13.PageRouteInfo<EditProductRouteArgs> {
-  EditProductRoute({
+/// [_i12.ProductModalScreen]
+class ProductModalRoute extends _i13.PageRouteInfo<ProductModalRouteArgs> {
+  ProductModalRoute({
     _i15.Product? product,
     _i14.Key? key,
     List<_i13.PageRouteInfo>? children,
   }) : super(
-          EditProductRoute.name,
-          args: EditProductRouteArgs(
+          ProductModalRoute.name,
+          args: ProductModalRouteArgs(
             product: product,
             key: key,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'EditProductRoute';
+  static const String name = 'ProductModalRoute';
 
-  static const _i13.PageInfo<EditProductRouteArgs> page =
-      _i13.PageInfo<EditProductRouteArgs>(name);
+  static const _i13.PageInfo<ProductModalRouteArgs> page =
+      _i13.PageInfo<ProductModalRouteArgs>(name);
 }
 
-class EditProductRouteArgs {
-  const EditProductRouteArgs({
+class ProductModalRouteArgs {
+  const ProductModalRouteArgs({
     this.product,
     this.key,
   });
@@ -328,6 +328,6 @@ class EditProductRouteArgs {
 
   @override
   String toString() {
-    return 'EditProductRouteArgs{product: $product, key: $key}';
+    return 'ProductModalRouteArgs{product: $product, key: $key}';
   }
 }
