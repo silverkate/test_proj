@@ -21,7 +21,7 @@ class EditProductScreen extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<EditProductFormBloc>(),
+      create: (context) => getIt<EditProductFormBloc>(param1: product),
       child: this,
     );
   }
@@ -87,8 +87,16 @@ class EditProductScreen extends StatelessWidget implements AutoRouteWrapper {
     final productsBloc = context.read<StxProductsBloc>();
     final formBloc = context.read<EditProductFormBloc>();
 
-    if (state.isEditing) {
-      //productsBloc.editItem(updatedItem);
+    if (product != null) {
+      final editedProduct = product?.copyWith(
+            title: formBloc.title.value ?? '',
+            description: formBloc.description.value ?? '',
+            category: formBloc.category.value ?? '',
+            price: formBloc.price.valueToDouble ?? 0.0,
+          ) ??
+          const Product();
+
+      productsBloc.editItem(editedProduct);
     } else {
       final product = Product(
         title: formBloc.title.value ?? '',
@@ -100,9 +108,6 @@ class EditProductScreen extends StatelessWidget implements AutoRouteWrapper {
       productsBloc.addItem(product);
     }
 
-    // submit success
-    // -> if state is create/edit product, then products bloc.add item state.response cast to product
-    // if edit -> edit item
-    // pop / navigate back
+    context.router.pop();
   }
 }

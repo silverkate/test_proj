@@ -1,18 +1,9 @@
-/// form bloc (separate type)
-///
-/// we can work with all fields separately
-///
-
-// on submit edit or create a product
-
-// submit.success(product)
-//
-
 import 'dart:async';
 
 import 'package:injectable/injectable.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 import 'package:test_proj/blocs/index.dart';
+import 'package:test_proj/models/index.dart';
 
 @Injectable(scope: 'auth')
 class EditProductFormBloc extends FormBloc<String, String> {
@@ -22,33 +13,38 @@ class EditProductFormBloc extends FormBloc<String, String> {
   late TextFieldBloc category;
 
   final StxProductsBloc productsBloc;
+  late final Product? product;
 
   EditProductFormBloc({
     required this.productsBloc,
+    @factoryParam this.product,
   }) : super(
+          /// If [customSubmit] - true, we need to manually handle progresses and
+          /// success, error emits.
           customSubmit: false,
         ) {
-    //, isEditing: initial != null) {
-    // customSubmit - loading handling - emitSuccess, emitFailure
     title = TextFieldBloc(
+      initialValue: product?.title,
       required: true,
       rules: {ValidationType.onBlur},
     );
 
     description = TextFieldBloc(
-      initialValue: 'This is one nice product :)',
+      initialValue: product?.description,
       required: true, // is the same as FieldBlocValidators.required
       customValidators: {FieldBlocValidators.requiredValidator},
       rules: {ValidationType.onBlur},
     );
 
     price = TextFieldBloc(
+      initialValue: product?.price.toString(),
       required: true, // is the same as FieldBlocValidators.required
       customValidators: {FieldBlocValidators.requiredValidator},
       rules: {ValidationType.onBlur},
     );
 
     category = TextFieldBloc(
+      initialValue: product?.category,
       required: true, // is the same as FieldBlocValidators.required
       customValidators: {FieldBlocValidators.requiredValidator},
       rules: {ValidationType.onBlur},
