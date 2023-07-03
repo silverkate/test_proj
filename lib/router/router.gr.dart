@@ -100,10 +100,11 @@ abstract class $AppRouter extends _i13.RootStackRouter {
           orElse: () => const CartModalRouteArgs());
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i11.CartModalScreen(
+        child: _i13.WrappedRoute(
+            child: _i11.CartModalScreen(
           cart: args.cart,
           key: args.key,
-        ),
+        )),
       );
     },
     CartsRoute.name: (routeData) {

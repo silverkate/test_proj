@@ -25,6 +25,12 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
     return Scaffold(
       appBar: AppBar(
         title: Text(LocaleKeys.carts.tr()),
+        actions: [
+          IconButton(
+            onPressed: () => _addElement(context),
+            icon: const Icon(Icons.add),
+          )
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: cartsBloc.loadAsyncFuture,
@@ -66,5 +72,9 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
         ),
       ),
     );
+  }
+
+  void _addElement(BuildContext context) {
+    context.router.push(CartModalRoute());
   }
 }
