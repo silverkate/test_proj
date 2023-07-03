@@ -3,17 +3,12 @@ import 'package:test_proj/models/index.dart';
 import 'package:test_proj/repositories/product_repository.dart';
 
 @lazySingleton
-class StxCategoriesBloc extends NetworkFilterableListBloc<String, String?,
-    NetworkFilterableState<List<String>, String?>> {
+class StxCategoriesBloc
+    extends NetworkListBloc<String, NetworkListState<String>> {
   StxCategoriesBloc(this.repository)
       : super(
-          const NetworkFilterableState(
-            data: [],
-            filter: null,
-            visibleData: [],
-          ),
+          const NetworkListState(data: []),
         );
-
   final ProductRepository repository;
 
   @override

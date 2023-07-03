@@ -34,6 +34,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     EasyLocalization.of(context);
+    final productsBloc = context.read<StxProductsBloc>();
 
     return Scaffold(
       appBar: AppBar(
@@ -49,7 +50,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
         onRefresh: () {
           _editingController.clear();
 
-          return context.read<StxProductsBloc>().loadAsyncFuture();
+          return productsBloc.loadAsyncFuture();
         },
         child: CustomScrollView(
           slivers: [
@@ -77,26 +78,33 @@ class _ProductsScreenState extends State<ProductsScreen> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: BlocBuilder<StxCategoriesBloc,
-                    NetworkFilterableState<List<String>, String?>>(
-                  buildWhen: (previous, current) =>
-                      previous.filter != current.filter ||
-                      previous.data != current.data,
-                  builder: (context, state) {
-                    return DropdownButton<String?>(
-                      value: state.filter,
-                      hint: Text(LocaleKeys.category.tr()),
-                      items: state.data.map<DropdownMenuItem<String>>(
-                        (String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                            ),
-                          );
-                        },
-                      ).toList(),
-                      onChanged: _setNewCategory,
+                child: BlocBuilder<
+                    StxProductsBloc,
+                    NetworkFilterableExtraListState<Product, String,
+                        List<String>>>(
+                  buildWhen: (previous, current) {
+                    return previous.filter != current.filter;
+                  },
+                  builder: (_, productState) {
+                    return BlocBuilder<StxCategoriesBloc,
+                        NetworkListState<String>>(
+                      builder: (context, state) {
+                        return DropdownButton<String?>(
+                          value: productState.filter,
+                          hint: Text(LocaleKeys.category.tr()),
+                          items: state.data.map<DropdownMenuItem<String>>(
+                            (String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                ),
+                              );
+                            },
+                          ).toList(),
+                          onChanged: _setNewCategory,
+                        );
+                      },
                     );
                   },
                 ),
@@ -139,14 +147,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   void _search(String query) {
-    context.read<StxCategoriesBloc>().filter(null);
     context.read<StxProductsBloc>().search(query);
   }
 
   void _setNewCategory(String? newCategory) {
-    context.read<StxCategoriesBloc>().filter(newCategory);
     _editingController.clear();
-
     context.read<StxProductsBloc>().filter(newCategory ?? '');
   }
 
