@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 import 'package:test_proj/styles/index.dart';
@@ -15,6 +16,7 @@ class TextInputFormBuilder extends StatefulWidget {
     this.nextFieldFocusNode,
     this.onSubmit,
     this.maxLines,
+    this.inputFormatters,
     this.keyboardType,
     required this.fieldBloc,
   });
@@ -27,6 +29,7 @@ class TextInputFormBuilder extends StatefulWidget {
   final VoidCallback? onSubmit;
   final int? maxLines;
   final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
   final TextFieldBloc fieldBloc;
 
   @override
@@ -77,6 +80,7 @@ class _TextInputFormBuilderState extends State<TextInputFormBuilder> {
               widget.nextFieldFocusNode?.requestFocus();
               widget.onSubmit?.call();
             },
+            inputFormatters: widget.inputFormatters,
             maxLines: widget.maxLines,
             keyboardType: widget.keyboardType,
             decoration: InputDecoration(

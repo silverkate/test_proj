@@ -1,6 +1,7 @@
 // fieldBlocListener
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 import 'package:test_proj/blocs/index.dart';
@@ -66,6 +67,9 @@ class EditProductScreen extends StatelessWidget implements AutoRouteWrapper {
                   keyboardType: const TextInputType.numberWithOptions(
                     decimal: true,
                   ),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.deny(RegExp('[a-zA-Z]')),
+                  ],
                   fieldBloc: formBloc.price,
                 ),
                 ElevatedButton(
