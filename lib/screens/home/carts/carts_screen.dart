@@ -36,6 +36,15 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
         onRefresh: cartsBloc.loadAsyncFuture,
         child: CustomScrollView(
           slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ElevatedButton(
+                  onPressed: () => _showRange(context),
+                  child: const Text('Start date - End date'),
+                ),
+              ),
+            ),
             BlocBuilder<CartsBloc, NetworkListState<Cart>>(
               builder: (context, state) {
                 switch (state.status) {
@@ -76,5 +85,15 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
 
   void _addElement(BuildContext context) {
     context.router.push(CartModalRoute());
+  }
+
+  Future<void> _showRange(BuildContext context) async {
+    final result = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2015, 1, 1),
+      lastDate: DateTime(2030, 12, 31),
+      currentDate: DateTime.now(),
+      saveText: 'Done',
+    );
   }
 }
