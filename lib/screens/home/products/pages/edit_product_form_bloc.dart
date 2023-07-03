@@ -79,7 +79,7 @@ class EditProductFormBloc extends FormBloc<String, String> {
   Future<FutureOr<void>> onSubmit() async {
     try {
       if (state.isEditing) {
-        productsBloc.editItem(updatedItem);
+        //productsBloc.editItem(updatedItem);
       } else {
         final product = Product(
           title: title.value ?? '',
