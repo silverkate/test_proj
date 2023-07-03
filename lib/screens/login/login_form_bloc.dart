@@ -14,11 +14,9 @@ class LoginFormBloc extends FormBloc<String, String> {
   final AuthRepository repository;
 
   LoginFormBloc({
-    required this.authBloc, // nullable product if null - create
+    required this.authBloc,
     required this.repository,
   }) : super(customSubmit: false) {
-    //, isEditing: initial != null) {
-    // customSubmit - loading handling - emitSuccess, emitFailure
     username = TextFieldBloc(
       initialValue: 'mor_2314',
       required: true,
@@ -27,23 +25,19 @@ class LoginFormBloc extends FormBloc<String, String> {
 
     password = TextFieldBloc(
       initialValue: '83r5^_',
-      required: true, // is the same as FieldBlocValidators.required
+      required: true,
       customValidators: {FieldBlocValidators.passwordMin6Chars},
       rules: {ValidationType.onBlur},
     );
 
     addFields([
-      // only this fields are validated on submit
       username,
       password,
     ]);
   }
 
-  // onInitialize - i.e. get categories when opening modal screen
-
   @override
   Future<FutureOr<void>> onSubmit() async {
-    // when we call submit from screen
     try {
       await repository.signIn(username.toString(), password.toString());
 

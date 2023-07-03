@@ -18,7 +18,6 @@ class LoginForm extends StatelessWidget {
           label: 'Username',
           fieldBloc: formBloc.username,
         ),
-        // dropdown -
         TextInputFormBuilder(
           isObscureText: true,
           label: 'Password',

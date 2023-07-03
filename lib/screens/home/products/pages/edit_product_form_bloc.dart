@@ -64,11 +64,6 @@ class EditProductFormBloc extends FormBloc<String, String> {
     ]);
   }
 
-  @override
-  FutureOr<void> onInitialize(Map<String, dynamic> params) {
-    return super.onInitialize(params);
-  }
-
   /// Is executed when we call submit from screen.
   @override
   Future<FutureOr<void>> onSubmit() async {
