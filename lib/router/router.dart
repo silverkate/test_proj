@@ -24,6 +24,7 @@ class AppRouter extends $AppRouter {
               page: HomeRoute.page,
               children: [
                 AutoRoute(page: DashboardRoute.page),
+                AutoRoute(page: CartsRoute.page),
                 AutoRoute(
                   page: MessagesRoute.page,
                   children: [
@@ -35,6 +36,7 @@ class AppRouter extends $AppRouter {
               ],
             ),
             AutoRoute(page: ChatDetailsRoute.page),
+            AutoRoute(page: CartModalRoute.page),
           ],
         ),
       ],
