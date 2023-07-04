@@ -38,13 +38,14 @@ class ProductModalScreen extends StatelessWidget implements AutoRouteWrapper {
       body: CustomFormBlocListener(
         formBloc: formBloc,
         onSuccess: (_, state) {
-          final product = state.response as Product?;
+          // ignore: cast_nullable_to_non_nullable
+          final product = state.response as Product;
           final productBloc = context.read<StxProductsBloc>();
 
           if (state.isEditing) {
-            productBloc.editItem(product ?? const Product());
+            productBloc.editItem(product);
           } else {
-            productBloc.addItem(product ?? const Product());
+            productBloc.addItem(product);
           }
         },
         child: SingleChildScrollView(

@@ -5,7 +5,7 @@ import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 import 'package:test_proj/blocs/index.dart';
 import 'package:test_proj/models/index.dart';
 
-@Injectable(scope: 'auth')
+@Injectable()
 class ProductModalFormBloc extends FormBloc<Product, String> {
   late TextFieldBloc title;
   late TextFieldBloc description;
