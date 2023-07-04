@@ -32,7 +32,9 @@ class CartModalBloc extends FormBloc<Cart, String> {
       rules: {ValidationType.onBlur},
     );
 
-    cart?.products?.map((e) => addProduct(e));
+    for (final element in cart?.products ?? [const Product()]) {
+      _addProduct(element);
+    }
 
     addFields([
       userId,
@@ -41,7 +43,33 @@ class CartModalBloc extends FormBloc<Cart, String> {
     ]);
   }
 
-  void addProduct(Product? product) {
+  @override
+  FutureOr<void> onSubmit() {
+    try {
+      var payload = cart ?? const Cart();
+
+      payload = payload.copyWith(
+        products: products.fields
+            .map(
+              (element) => Product(
+                productId: element.fields[0].value,
+                quantity: element.fields[1].value,
+              ),
+            )
+            .toList(),
+        userId: userId.value,
+        date: DateTime.tryParse(date.value ?? ''),
+      );
+
+      emitSuccess(payload);
+    } catch (error, stacktrace) {
+      addError(error, stacktrace);
+
+      emitFailure(error.toString());
+    }
+  }
+
+  void _addProduct(Product? product) {
     products.addFieldBloc(
       GroupFieldBloc(
         fieldBlocs: [
@@ -58,24 +86,5 @@ class CartModalBloc extends FormBloc<Cart, String> {
         ],
       ),
     );
-  }
-
-  @override
-  FutureOr<void> onSubmit() {
-    try {
-      var payload = cart ?? const Cart();
-
-      payload = payload.copyWith(
-        //products: products,
-        userId: userId.value,
-        date: DateTime.tryParse(date.value ?? ''),
-      );
-
-      emitSuccess(payload);
-    } catch (error, stacktrace) {
-      addError(error, stacktrace);
-
-      emitFailure(error.toString());
-    }
   }
 }
