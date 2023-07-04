@@ -15,7 +15,7 @@ class TextInputFormBuilder extends StatefulWidget {
     this.fieldFocusNode,
     this.nextFieldFocusNode,
     this.onSubmit,
-    this.maxLines,
+    this.maxLines = 1,
     this.inputFormatters,
     this.keyboardType,
     required this.fieldBloc,

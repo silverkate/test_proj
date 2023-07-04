@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/router/index.dart';
 import 'package:test_proj/screens/home/products/pages/product_modal_form_bloc.dart';
+import 'package:test_proj/screens/home/products/stx_products_bloc.dart';
 import 'package:test_proj/services/index.dart';
 import 'package:test_proj/widgets/form_builder/index.dart';
 
@@ -36,7 +37,16 @@ class ProductModalScreen extends StatelessWidget implements AutoRouteWrapper {
       ),
       body: CustomFormBlocListener(
         formBloc: formBloc,
-        onSuccess: _submitSuccess,
+        onSuccess: (_, state) {
+          final product = state.response as Product?;
+          final productBloc = context.read<StxProductsBloc>();
+
+          if (state.isEditing) {
+            productBloc.editItem(product ?? const Product());
+          } else {
+            productBloc.addItem(product ?? const Product());
+          }
+        },
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
