@@ -29,14 +29,19 @@ class _ProductInputFormBuilderState extends State<ProductInputFormBuilder> {
   late TextEditingController _productIdController;
   late TextEditingController _quantityController;
 
+  var _product = const Product();
+
   @override
   void initState() {
-    final product = widget.fieldBloc[widget.index];
+    if (widget.fieldBloc.isNotEmpty) {
+      _product = widget.fieldBloc[widget.index];
+    }
 
     _productIdController =
-        TextEditingController(text: product.productId.toString());
+        TextEditingController(text: _product.productId?.toString());
     _quantityController =
-        TextEditingController(text: product.quantity.toString());
+        TextEditingController(text: _product.quantity?.toString());
+
     super.initState();
   }
 
@@ -45,8 +50,6 @@ class _ProductInputFormBuilderState extends State<ProductInputFormBuilder> {
     return BlocBuilder<ListFieldBloc<Product>, ListFieldBlocState<Product>>(
       bloc: widget.fieldBloc,
       builder: (context, state) {
-        final product = widget.fieldBloc[widget.index];
-
         return Focus(
           onFocusChange: (value) {
             if (!value) {
@@ -64,7 +67,7 @@ class _ProductInputFormBuilderState extends State<ProductInputFormBuilder> {
                   focusNode: widget.fieldFocusNode,
                   onChanged: (value) => widget.fieldBloc.replaceAt(
                     widget.index,
-                    product.copyWith(
+                    _product.copyWith(
                       productId: int.tryParse(_productIdController.text) ?? 0,
                     ),
                   ),
@@ -92,8 +95,9 @@ class _ProductInputFormBuilderState extends State<ProductInputFormBuilder> {
                   focusNode: widget.fieldFocusNode,
                   onChanged: (value) => widget.fieldBloc.replaceAt(
                     widget.index,
-                    product.copyWith(
-                        quantity: int.tryParse(_quantityController.text) ?? 0),
+                    _product.copyWith(
+                      quantity: int.tryParse(_quantityController.text) ?? 0,
+                    ),
                   ),
                   onSubmitted: (value) {
                     widget.nextFieldFocusNode?.requestFocus();

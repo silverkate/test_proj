@@ -12,9 +12,9 @@ import 'package:auto_route/auto_route.dart' as _i13;
 import 'package:flutter/material.dart' as _i14;
 import 'package:test_proj/models/index.dart' as _i15;
 import 'package:test_proj/screens/auth_screen.dart' as _i10;
-import 'package:test_proj/screens/home/carts/carts_screen.dart' as _i12;
+import 'package:test_proj/screens/home/carts/carts_screen.dart' as _i11;
 import 'package:test_proj/screens/home/carts/pages/cart_modal_screen.dart'
-    as _i11;
+    as _i12;
 import 'package:test_proj/screens/home/dashboard/dashboard_screen.dart' as _i6;
 import 'package:test_proj/screens/home/home_screen.dart' as _i8;
 import 'package:test_proj/screens/home/home_wrapper.dart' as _i7;
@@ -95,22 +95,22 @@ abstract class $AppRouter extends _i13.RootStackRouter {
         child: const _i10.AuthScreen(),
       );
     },
+    CartsRoute.name: (routeData) {
+      return _i13.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i13.WrappedRoute(child: const _i11.CartsScreen()),
+      );
+    },
     CartModalRoute.name: (routeData) {
       final args = routeData.argsAs<CartModalRouteArgs>(
           orElse: () => const CartModalRouteArgs());
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i13.WrappedRoute(
-            child: _i11.CartModalScreen(
+            child: _i12.CartModalScreen(
           cart: args.cart,
           key: args.key,
         )),
-      );
-    },
-    CartsRoute.name: (routeData) {
-      return _i13.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i13.WrappedRoute(child: const _i12.CartsScreen()),
       );
     },
   };
@@ -281,7 +281,21 @@ class AuthRoute extends _i13.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.CartModalScreen]
+/// [_i11.CartsScreen]
+class CartsRoute extends _i13.PageRouteInfo<void> {
+  const CartsRoute({List<_i13.PageRouteInfo>? children})
+      : super(
+          CartsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CartsRoute';
+
+  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i12.CartModalScreen]
 class CartModalRoute extends _i13.PageRouteInfo<CartModalRouteArgs> {
   CartModalRoute({
     _i15.Cart? cart,
@@ -316,18 +330,4 @@ class CartModalRouteArgs {
   String toString() {
     return 'CartModalRouteArgs{cart: $cart, key: $key}';
   }
-}
-
-/// generated route for
-/// [_i12.CartsScreen]
-class CartsRoute extends _i13.PageRouteInfo<void> {
-  const CartsRoute({List<_i13.PageRouteInfo>? children})
-      : super(
-          CartsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CartsRoute';
-
-  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
 }
