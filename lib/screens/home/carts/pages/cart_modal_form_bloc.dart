@@ -9,8 +9,9 @@ import 'package:test_proj/screens/home/carts/carts_bloc.dart';
 class CartModalBloc extends FormBloc<String, String> {
   final Cart? cart;
 
-  late TextFieldBloc title;
-  late TextFieldBloc description;
+  late TextFieldBloc userId;
+  late TextFieldBloc date;
+  late ListFieldBloc<Product> products;
 
   final CartsBloc cartBloc;
 
@@ -23,23 +24,27 @@ class CartModalBloc extends FormBloc<String, String> {
           customSubmit: false,
           isEditing: cart != null,
         ) {
-    title = TextFieldBloc(
+    userId = TextFieldBloc(
+      initialValue: cart?.userId.toString(),
+      required: true,
+      rules: {ValidationType.onBlur},
+    );
+
+    date = TextFieldBloc(
       initialValue: cart?.date.toString(),
       required: true,
       rules: {ValidationType.onBlur},
     );
 
-    description = TextFieldBloc(
-      initialValue: cart?.id.toString(),
-      required: true, // is the same as FieldBlocValidators.required
-      customValidators: {FieldBlocValidators.requiredValidator},
+    products = ListFieldBloc<Product>(
+      required: true,
       rules: {ValidationType.onBlur},
     );
 
     addFields([
       /// Only this fields are to be validated on submit.
-      title,
-      description,
+      userId,
+      date,
     ]);
   }
 
@@ -48,11 +53,11 @@ class CartModalBloc extends FormBloc<String, String> {
   FutureOr<void> onSubmit() {
     try {
       if (state.isEditing) {
-        final editedProduct = const Cart();
+        const editedProduct = Cart();
 
         cartBloc.editItem(editedProduct);
       } else {
-        final cart = const Cart();
+        const cart = Cart();
 
         cartBloc.addItem(cart);
       }

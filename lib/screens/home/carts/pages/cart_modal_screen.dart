@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/router/index.dart';
 import 'package:test_proj/screens/home/carts/pages/cart_modal_form_bloc.dart';
+import 'package:test_proj/screens/home/carts/pages/widgets/products_modal_widget.dart';
 import 'package:test_proj/services/index.dart';
 import 'package:test_proj/widgets/form_builder/index.dart';
 
@@ -30,7 +31,7 @@ class CartModalScreen extends StatelessWidget implements AutoRouteWrapper {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          formBloc.isEditing ? 'Edit the product' : 'Add a new product',
+          formBloc.isEditing ? 'Edit the cart' : 'Add a new cart',
         ),
       ),
       body: CustomFormBlocListener(
@@ -44,14 +45,20 @@ class CartModalScreen extends StatelessWidget implements AutoRouteWrapper {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextInputFormBuilder(
-                  label: 'Title',
-                  hintText: 'Title',
-                  fieldBloc: formBloc.title,
+                  label: 'User id',
+                  hintText: 'User id',
+                  fieldBloc: formBloc.userId,
                 ),
                 TextInputFormBuilder(
-                  label: 'Description',
-                  hintText: 'Description',
-                  fieldBloc: formBloc.description,
+                  label: 'Date',
+                  hintText: 'Date',
+                  fieldBloc: formBloc.date,
+                ),
+                const Text('Products'),
+                ProductsModalWidget(products: cart?.products),
+                ElevatedButton(
+                  onPressed: _addNewProduct,
+                  child: const Text('Add a new product'),
                 ),
                 ElevatedButton(
                   onPressed: formBloc.submit,
@@ -68,4 +75,6 @@ class CartModalScreen extends StatelessWidget implements AutoRouteWrapper {
   void _submitSuccess(BuildContext context, _) {
     context.router.pop();
   }
+
+  void _addNewProduct() {}
 }

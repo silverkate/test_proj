@@ -108,6 +108,10 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
       lastDate: DateTime(2030, 12, 31),
       currentDate: DateTime.now(),
       saveText: 'Done',
-    ).then((value) => context.read<CartsBloc>().filter(value));
+    ).then((value) {
+      if (value != null) {
+        context.read<CartsBloc>().filter(value);
+      }
+    });
   }
 }
