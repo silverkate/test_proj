@@ -51,9 +51,7 @@ class CartModalScreen extends StatelessWidget implements AutoRouteWrapper {
                   hintText: 'User id',
                   fieldBloc: formBloc.userId,
                 ),
-                TextInputFormBuilder(
-                  label: 'Date',
-                  hintText: 'Date',
+                DateInputFormBuilder(
                   fieldBloc: formBloc.date,
                 ),
                 const Text('Products'),

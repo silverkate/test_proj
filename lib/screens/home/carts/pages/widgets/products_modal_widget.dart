@@ -14,14 +14,12 @@ class ProductsModalWidget extends StatelessWidget {
 
     return BlocBuilder(
       bloc: formBloc.products,
-      builder: (_, __) {
-        return ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: formBloc.products.fields.length,
-          itemBuilder: _itemBuilder,
-        );
-      },
+      builder: (_, __) => ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: formBloc.products.fields.length,
+        itemBuilder: _itemBuilder,
+      ),
     );
   }
 

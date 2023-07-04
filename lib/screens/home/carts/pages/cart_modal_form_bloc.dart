@@ -7,7 +7,7 @@ import 'package:test_proj/models/index.dart';
 @Injectable()
 class CartModalBloc extends FormBloc<Cart, String> {
   late NumberFieldBloc userId;
-  late TextFieldBloc date;
+  late DateTimeFieldBloc date;
   GroupFieldBloc<GroupFieldBloc<NumberFieldBloc>> products = GroupFieldBloc();
 
   final Cart? cart;
@@ -26,8 +26,8 @@ class CartModalBloc extends FormBloc<Cart, String> {
       rules: {ValidationType.onBlur},
     );
 
-    date = TextFieldBloc(
-      initialValue: cart?.date.toString(),
+    date = DateTimeFieldBloc(
+      initialValue: cart?.date,
       required: true,
       rules: {ValidationType.onBlur},
     );
@@ -58,7 +58,7 @@ class CartModalBloc extends FormBloc<Cart, String> {
             )
             .toList(),
         userId: userId.value,
-        date: DateTime.tryParse(date.value ?? ''),
+        date: date.value,
       );
 
       emitSuccess(payload);
