@@ -8,6 +8,7 @@ import 'package:test_proj/models/index.dart';
 class CartModalBloc extends FormBloc<Cart, String> {
   late NumberFieldBloc userId;
   late DateTimeFieldBloc date;
+
   GroupFieldBloc<GroupFieldBloc<NumberFieldBloc>> products = GroupFieldBloc();
 
   final Cart? cart;
@@ -15,8 +16,6 @@ class CartModalBloc extends FormBloc<Cart, String> {
   CartModalBloc({
     @factoryParam this.cart,
   }) : super(
-          /// If [customSubmit] - true, we need to manually handle progresses
-          /// and success, error emits.
           customSubmit: false,
           isEditing: cart != null,
         ) {

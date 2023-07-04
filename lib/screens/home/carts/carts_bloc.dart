@@ -6,6 +6,8 @@ import 'package:test_proj/repositories/carts_repository.dart';
 @lazySingleton
 class CartsBloc extends NetworkFilterableListBloc<Cart, DateTimeRange?,
     NetworkFilterableState<List<Cart>, DateTimeRange?>> {
+  final CartsRepository repository;
+
   CartsBloc(this.repository)
       : super(
           const NetworkFilterableState(
@@ -13,8 +15,6 @@ class CartsBloc extends NetworkFilterableListBloc<Cart, DateTimeRange?,
             visibleData: [],
           ),
         );
-
-  final CartsRepository repository;
 
   @override
   Future<List<Cart>> onLoadAsync() {

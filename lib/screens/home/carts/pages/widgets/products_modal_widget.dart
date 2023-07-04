@@ -4,9 +4,7 @@ import 'package:test_proj/screens/home/carts/pages/cart_modal_form_bloc.dart';
 import 'package:test_proj/screens/home/carts/pages/widgets/product_input_form_builder.dart';
 
 class ProductsModalWidget extends StatelessWidget {
-  const ProductsModalWidget({
-    super.key,
-  });
+  const ProductsModalWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
