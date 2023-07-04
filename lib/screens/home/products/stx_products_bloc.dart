@@ -38,9 +38,6 @@ class StxProductsBloc extends NetworkFilterableListBloc<
 
   final ProductRepository repository;
 
-  /// List of the data after the loading.
-  List<Product> _data = [];
-
   /// Getting the list of products to display.
   @override
   Future<List<Product>> onLoadAsync() {
@@ -63,41 +60,25 @@ class StxProductsBloc extends NetworkFilterableListBloc<
     DataChangeReason reason,
     NetworkFilterableExtraListState<Product, String, List<String>> state,
   ) {
-    if (reason.isLoaded) {
-      _data = state.data;
-    } else if (reason.isSearched) {
-      final search = state.query ?? '';
+    var visibleData = state.data;
 
-      final filteredProducts = _data
+    if (state.query?.isNotEmpty ?? false) {
+      visibleData = visibleData
           .where(
-            (element) =>
-                element.title.toLowerCase().contains(search.toLowerCase()),
+            (element) => element.title
+                .toLowerCase()
+                .contains(state.query!.toLowerCase()),
           )
           .toList();
-
-      return NetworkFilterableExtraListState(
-        data: filteredProducts,
-        visibleData: filteredProducts,
-        extraData: const [],
-        status: NetworkStatus.success,
-      );
-    } else if (reason.isFiltered) {
-      final category = state.filter;
-
-      final filteredProducts = _data.where((e) {
-        return e.category == category;
-      }).toList();
-
-      return NetworkFilterableExtraListState(
-        data: filteredProducts,
-        visibleData: filteredProducts,
-        extraData: const [],
-        status: NetworkStatus.success,
-        filter: state.filter,
-      );
     }
 
-    return super.onStateChanged(reason, state);
+    if (state.filter != null) {
+      visibleData = visibleData.where((e) {
+        return e.category == state.filter;
+      }).toList();
+    }
+
+    return state.copyWith(visibleData: visibleData);
   }
 
   @override
