@@ -60,32 +60,25 @@ class StxProductsBloc extends NetworkFilterableListBloc<
     DataChangeReason reason,
     NetworkFilterableExtraListState<Product, String, List<String>> state,
   ) {
-    if (reason.isSearched) {
-      final search = state.query ?? '';
+    var visibleData = state.data;
 
-      final filteredProducts = state.data
+    if (state.query?.isNotEmpty ?? false) {
+      visibleData = visibleData
           .where(
-            (element) =>
-                element.title.toLowerCase().contains(search.toLowerCase()),
+            (element) => element.title
+                .toLowerCase()
+                .contains(state.query!.toLowerCase()),
           )
           .toList();
-
-      return state.copyWith(
-        visibleData: filteredProducts,
-      );
-    } else if (reason.isFiltered) {
-      final category = state.filter;
-
-      final filteredProducts = state.data.where((e) {
-        return e.category == category;
-      }).toList();
-
-      return state.copyWith(
-        visibleData: filteredProducts,
-      );
     }
 
-    return super.onStateChanged(reason, state);
+    if (state.filter != null) {
+      visibleData = visibleData.where((e) {
+        return e.category == state.filter;
+      }).toList();
+    }
+
+    return state.copyWith(visibleData: visibleData);
   }
 
   @override

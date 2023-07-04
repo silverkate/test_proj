@@ -12,8 +12,8 @@ class ProductsScreen extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    context.read<StxProductsBloc>().add(NetworkEventLoadAsync());
-    context.read<StxCategoriesBloc>().add(NetworkEventLoadAsync());
+    context.read<StxProductsBloc>().load();
+    context.read<StxCategoriesBloc>().load();
 
     return this;
   }
@@ -152,7 +152,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   void _setNewCategory(String? newCategory) {
-    _editingController.clear();
     context.read<StxProductsBloc>().filter(newCategory ?? '');
   }
 
