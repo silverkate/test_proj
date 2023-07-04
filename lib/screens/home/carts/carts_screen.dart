@@ -59,7 +59,8 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
                 );
               },
             ),
-            BlocBuilder<CartsBloc, NetworkListState<Cart>>(
+            BlocBuilder<CartsBloc,
+                NetworkFilterableState<List<Cart>, DateTimeRange?>>(
               builder: (context, state) {
                 switch (state.status) {
                   case NetworkStatus.initial:
@@ -71,14 +72,14 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
-                          final cart = state.data[index];
+                          final cart = state.visibleData[index];
 
                           return Padding(
                             padding: const EdgeInsets.all(8),
                             child: CartWidget(cart: cart),
                           );
                         },
-                        childCount: state.data.length,
+                        childCount: state.visibleData.length,
                       ),
                     );
 
@@ -104,8 +105,8 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
   void _showRange(BuildContext context) {
     showDateRangePicker(
       context: context,
-      firstDate: DateTime(2015, 1, 1),
-      lastDate: DateTime(2030, 12, 31),
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2030),
       currentDate: DateTime.now(),
       saveText: 'Done',
     ).then((value) {
