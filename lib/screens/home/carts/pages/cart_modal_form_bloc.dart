@@ -6,11 +6,11 @@ import 'package:test_proj/models/index.dart';
 
 @Injectable()
 class CartModalBloc extends FormBloc<Cart, String> {
-  final Cart? cart;
-
-  late TextFieldBloc userId;
+  late NumberFieldBloc userId;
   late TextFieldBloc date;
-  late ListFieldBloc<Product> products;
+  GroupFieldBloc<GroupFieldBloc<NumberFieldBloc>> products = GroupFieldBloc();
+
+  final Cart? cart;
 
   CartModalBloc({
     @factoryParam this.cart,
@@ -20,8 +20,8 @@ class CartModalBloc extends FormBloc<Cart, String> {
           customSubmit: false,
           isEditing: cart != null,
         ) {
-    userId = TextFieldBloc(
-      initialValue: cart?.userId.toString(),
+    userId = NumberFieldBloc(
+      initialValue: cart?.userId,
       required: true,
       rules: {ValidationType.onBlur},
     );
@@ -32,24 +32,46 @@ class CartModalBloc extends FormBloc<Cart, String> {
       rules: {ValidationType.onBlur},
     );
 
-    products = ListFieldBloc<Product>(
-      initialValue: cart?.products ?? <Product>[],
-      required: true,
-      rules: {ValidationType.onBlur},
-    );
+    cart?.products?.map((e) => addProduct(e));
 
     addFields([
       userId,
       date,
+      products,
     ]);
+  }
+
+  void addProduct(Product? product) {
+    products.addFieldBloc(
+      GroupFieldBloc(
+        fieldBlocs: [
+          NumberFieldBloc(
+            initialValue: product?.productId,
+            required: true,
+            rules: {ValidationType.onBlur},
+          ),
+          NumberFieldBloc(
+            initialValue: product?.quantity,
+            required: true,
+            rules: {ValidationType.onBlur},
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   FutureOr<void> onSubmit() {
     try {
-      const cart = Cart();
+      var payload = cart ?? const Cart();
 
-      emitSuccess(cart);
+      payload = payload.copyWith(
+        //products: products,
+        userId: userId.value,
+        date: DateTime.tryParse(date.value ?? ''),
+      );
+
+      emitSuccess(payload);
     } catch (error, stacktrace) {
       addError(error, stacktrace);
 

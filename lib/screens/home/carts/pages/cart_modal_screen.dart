@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/router/index.dart';
+import 'package:test_proj/screens/home/carts/carts_bloc.dart';
 import 'package:test_proj/screens/home/carts/pages/cart_modal_form_bloc.dart';
 import 'package:test_proj/screens/home/carts/pages/widgets/products_modal_widget.dart';
 import 'package:test_proj/services/index.dart';
@@ -44,7 +46,7 @@ class CartModalScreen extends StatelessWidget implements AutoRouteWrapper {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                TextInputFormBuilder(
+                NumberInputFormBuilder(
                   label: 'User id',
                   hintText: 'User id',
                   fieldBloc: formBloc.userId,
@@ -72,7 +74,19 @@ class CartModalScreen extends StatelessWidget implements AutoRouteWrapper {
     );
   }
 
-  void _submitSuccess(BuildContext context, _) {
+  void _submitSuccess(
+    BuildContext context,
+    FormBlocState<dynamic, String> state,
+  ) {
+    final cartsBloc = context.read<CartsBloc>();
+    final cart = state.response as Cart;
+
+    if (state.isEditing) {
+      cartsBloc.editItem(cart);
+    } else {
+      cartsBloc.addItem(cart);
+    }
+
     context.router.pop();
   }
 
