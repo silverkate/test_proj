@@ -38,9 +38,6 @@ class StxProductsBloc extends NetworkFilterableListBloc<
 
   final ProductRepository repository;
 
-  /// List of the data after the loading.
-  List<Product> _data = [];
-
   /// Getting the list of products to display.
   @override
   Future<List<Product>> onLoadAsync() {
@@ -63,37 +60,28 @@ class StxProductsBloc extends NetworkFilterableListBloc<
     DataChangeReason reason,
     NetworkFilterableExtraListState<Product, String, List<String>> state,
   ) {
-    if (reason.isLoaded) {
-      _data = state.data;
-    } else if (reason.isSearched) {
+    if (reason.isSearched) {
       final search = state.query ?? '';
 
-      final filteredProducts = _data
+      final filteredProducts = state.data
           .where(
             (element) =>
                 element.title.toLowerCase().contains(search.toLowerCase()),
           )
           .toList();
 
-      return NetworkFilterableExtraListState(
-        data: filteredProducts,
+      return state.copyWith(
         visibleData: filteredProducts,
-        extraData: const [],
-        status: NetworkStatus.success,
       );
     } else if (reason.isFiltered) {
       final category = state.filter;
 
-      final filteredProducts = _data.where((e) {
+      final filteredProducts = state.data.where((e) {
         return e.category == category;
       }).toList();
 
-      return NetworkFilterableExtraListState(
-        data: filteredProducts,
+      return state.copyWith(
         visibleData: filteredProducts,
-        extraData: const [],
-        status: NetworkStatus.success,
-        filter: state.filter,
       );
     }
 

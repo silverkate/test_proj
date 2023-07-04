@@ -110,7 +110,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 ),
               ),
             ),
-            BlocBuilder<StxProductsBloc, NetworkListState<Product>>(
+            BlocBuilder<StxProductsBloc,
+                NetworkFilterableExtraListState<Product, String, List<String>>>(
               builder: (context, state) {
                 switch (state.status) {
                   case NetworkStatus.initial:
@@ -122,14 +123,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
-                          final product = state.data[index];
+                          final product = state.visibleData[index];
 
                           return Padding(
                             padding: const EdgeInsets.all(8),
                             child: ProductWidget(product: product),
                           );
                         },
-                        childCount: state.data.length,
+                        childCount: state.visibleData.length,
                       ),
                     );
 
