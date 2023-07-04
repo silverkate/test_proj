@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 import 'package:test_proj/models/index.dart';
 
-@Injectable(scope: 'auth')
+@Injectable()
 class CartModalBloc extends FormBloc<Cart, String> {
   final Cart? cart;
 
@@ -33,6 +33,7 @@ class CartModalBloc extends FormBloc<Cart, String> {
     );
 
     products = ListFieldBloc<Product>(
+      initialValue: cart?.products ?? <Product>[],
       required: true,
       rules: {ValidationType.onBlur},
     );
