@@ -65,21 +65,23 @@ class ProductModalFormBloc extends FormBloc<Product, String> {
       category,
     ]);
 
-    addSubscription(title.valueStream.listen((value) {
-      if (value == 'test') {
-        removeField(description);
+    addSubscription(
+      title.valueStream.listen((value) {
+        if (value == 'test') {
+          removeField(description);
 
-        description.toString();
-      } else {
-        addField(description);
-      }
-    }));
+          description.toString();
+        } else {
+          addField(description);
+        }
+      }),
+    );
   }
 
   /// Is executed when we call submit from screen.
   @override
   FutureOr<void> onSubmit() {
-    var payload = product ?? Product();
+    var payload = product ?? const Product();
 
     payload = payload.copyWith(
       title: title.value ?? '',

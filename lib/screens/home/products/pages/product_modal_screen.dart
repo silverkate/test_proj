@@ -91,8 +91,4 @@ class ProductModalScreen extends StatelessWidget implements AutoRouteWrapper {
       ),
     );
   }
-
-  void _submitSuccess(BuildContext context, _) {
-    context.router.pop();
-  }
 }
