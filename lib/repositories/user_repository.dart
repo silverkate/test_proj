@@ -15,4 +15,10 @@ class UserRepository {
 
     return UserProfile.fromJson(value.data);
   }
+
+  Future<List<UserProfile>> getUsers() async {
+    final response = await httpClient.get('/users');
+
+    return (response.data as List).map((x) => UserProfile.fromJson(x)).toList();
+  }
 }

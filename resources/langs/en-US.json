@@ -18,5 +18,7 @@
     "signOut": "Sign Out",
 
     "error": "Error",
-    "ok": "OK"
+    "ok": "OK",
+
+    "users": "Users"
 }
