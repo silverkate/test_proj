@@ -15,7 +15,6 @@ class CartsBloc extends NetworkFilterableListBloc<Cart, DateTimeRange?,
         );
 
   final CartsRepository repository;
-  List<Cart> _carts = [];
 
   @override
   Future<List<Cart>> onLoadAsync() {
@@ -27,27 +26,27 @@ class CartsBloc extends NetworkFilterableListBloc<Cart, DateTimeRange?,
     DataChangeReason reason,
     NetworkFilterableState<List<Cart>, DateTimeRange?> state,
   ) {
-    if (reason.isLoaded) {
-      _carts = state.data;
-    } else if (reason.isFiltered) {
+    var visibleData = state.data;
+
+    if (state.filter != null) {
       final startDate = state.filter?.start;
       final endDate = state.filter?.end;
 
-      return state.copyWith(
-        data: _carts.where(
-          (element) {
-            final isAfterStartDate =
-                element.date?.isAfter(startDate ?? DateTime.now()) ?? false;
-            final isBeforeEndDate =
-                element.date?.isBefore(endDate ?? DateTime.now()) ?? false;
+      visibleData = visibleData.where(
+        (element) {
+          final isAfterStartDate =
+              element.date?.isAfter(startDate ?? DateTime.now()) ?? false;
+          final isBeforeEndDate =
+              element.date?.isBefore(endDate ?? DateTime.now()) ?? false;
 
-            return isAfterStartDate && isBeforeEndDate;
-          },
-        ).toList(),
-      );
+          return isAfterStartDate && isBeforeEndDate;
+        },
+      ).toList();
     }
 
-    return super.onStateChanged(reason, state);
+    return state.copyWith(
+      visibleData: visibleData,
+    );
   }
 
   @override

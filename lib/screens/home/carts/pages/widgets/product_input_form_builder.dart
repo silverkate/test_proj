@@ -52,63 +52,60 @@ class _ProductInputFormBuilderState extends State<ProductInputFormBuilder> {
             );
         }
         return Focus(
-            onFocusChange: (value) {
-              if (!value) {
-                widget.fieldBloc.focusChanged();
-              }
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    autocorrect: false,
-                    textInputAction: TextInputAction.next,
-                    focusNode: widget.fieldFocusNode,
-                    obscureText: widget.isObscureText,
-                    onChanged: (value) => widget.fieldBloc.changeValue(value),
-                    onSubmitted: (value) {
-                      widget.nextFieldFocusNode?.requestFocus();
-                      widget.onSubmit?.call();
-                    },
-                    decoration: InputDecoration(
-                      hintText: widget.hintText,
-                      errorText: state.displayError,
-                      helperText: '',
-                      helperMaxLines: 1,
-                      errorMaxLines: 1,
-                      helperStyle: AppTextStyles.error,
-                      errorStyle: AppTextStyles.error,
-                    ),
+          onFocusChange: (value) {
+            if (!value) {
+              widget.fieldBloc.focusChanged();
+            }
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  autocorrect: false,
+                  textInputAction: TextInputAction.next,
+                  focusNode: widget.fieldFocusNode,
+                  onChanged: (value) => widget.fieldBloc.changeValue(value),
+                  onSubmitted: (value) {
+                    widget.nextFieldFocusNode?.requestFocus();
+                    widget.onSubmit?.call();
+                  },
+                  decoration: InputDecoration(
+                    errorText: state.displayError,
+                    helperText: '',
+                    helperMaxLines: 1,
+                    errorMaxLines: 1,
+                    helperStyle: AppTextStyles.error,
+                    errorStyle: AppTextStyles.error,
                   ),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    autocorrect: false,
-                    textInputAction: TextInputAction.next,
-                    focusNode: widget.fieldFocusNode,
-                    obscureText: widget.isObscureText,
-                    onChanged: (value) => widget.fieldBloc.changeValue(value),
-                    onSubmitted: (value) {
-                      widget.nextFieldFocusNode?.requestFocus();
-                      widget.onSubmit?.call();
-                    },
-                    decoration: InputDecoration(
-                      hintText: widget.hintText,
-                      errorText: state.displayError,
-                      helperText: '',
-                      helperMaxLines: 1,
-                      errorMaxLines: 1,
-                      helperStyle: AppTextStyles.error,
-                      errorStyle: AppTextStyles.error,
-                    ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  autocorrect: false,
+                  textInputAction: TextInputAction.next,
+                  focusNode: widget.fieldFocusNode,
+                  onChanged: (value) => widget.fieldBloc.changeValue(value),
+                  onSubmitted: (value) {
+                    widget.nextFieldFocusNode?.requestFocus();
+                    widget.onSubmit?.call();
+                  },
+                  decoration: InputDecoration(
+                    errorText: state.displayError,
+                    helperText: '',
+                    helperMaxLines: 1,
+                    errorMaxLines: 1,
+                    helperStyle: AppTextStyles.error,
+                    errorStyle: AppTextStyles.error,
                   ),
                 ),
-              ],
-            ));
+              ),
+            ],
+          ),
+        );
       },
     );
   }

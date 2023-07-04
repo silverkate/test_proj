@@ -12,7 +12,7 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    context.read<CartsBloc>().add(NetworkEventLoadAsync());
+    context.read<CartsBloc>().load();
 
     return this;
   }

@@ -25,6 +25,6 @@ class ProductsModalWidget extends StatelessWidget {
     final formBloc = context.read<CartModalBloc>();
     final product = formBloc.products[index];
 
-    return;
+    return const SizedBox();
   }
 }

@@ -65,10 +65,7 @@ extension GetItInjectableX on _i1.GetIt {
           cart,
           _,
         ) =>
-            _i11.CartModalBloc(
-              cartBloc: gh<_i7.CartsBloc>(),
-              cart: cart,
-            ));
+            _i11.CartModalBloc(cart: cart));
         gh.singleton<_i4.HttpClient>(_i4.HttpClient());
         gh.factory<_i13.UserRepository>(
             () => _i13.UserRepository(gh<_i4.HttpClient>()));
