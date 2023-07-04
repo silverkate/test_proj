@@ -32,7 +32,7 @@ class CartWidget extends StatelessWidget {
       title: Text(
         'Id: ${cart.id}, '
         'UserId: ${cart.userId}, '
-        '${DateFormat.yMMMMEEEEd().format(cart.date ?? DateTime.now())}',
+        '${DateFormat.yMEd().format(cart.date ?? DateTime.now())}',
       ),
       subtitle: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),

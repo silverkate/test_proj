@@ -1,11 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:test_proj/core/extensions/index.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/repositories/carts_repository.dart';
 
 @lazySingleton
-class CartsBloc extends NetworkFilterableListBloc<Cart, DateTime,
-    NetworkFilterableState<List<Cart>, DateTime>> {
+class CartsBloc extends NetworkFilterableListBloc<Cart, DateTimeRange?,
+    NetworkFilterableState<List<Cart>, DateTimeRange?>> {
   CartsBloc(this.repository)
       : super(
           const NetworkFilterableState(
@@ -23,21 +23,27 @@ class CartsBloc extends NetworkFilterableListBloc<Cart, DateTime,
   }
 
   @override
-  NetworkFilterableState<List<Cart>, DateTime> onStateChanged(
+  NetworkFilterableState<List<Cart>, DateTimeRange?> onStateChanged(
     DataChangeReason reason,
-    NetworkFilterableState<List<Cart>, DateTime> state,
+    NetworkFilterableState<List<Cart>, DateTimeRange?> state,
   ) {
     if (reason.isLoaded) {
       _carts = state.data;
     } else if (reason.isFiltered) {
+      final startDate = state.filter?.start;
+      final endDate = state.filter?.end;
+
       return state.copyWith(
-        data: _carts
-            .where(
-              (element) =>
-                  element.date?.isTheSameDate(state.filter ?? DateTime.now()) ??
-                  false,
-            )
-            .toList(),
+        data: _carts.where(
+          (element) {
+            final isAfterStartDate =
+                element.date?.isAfter(startDate ?? DateTime.now()) ?? false;
+            final isBeforeEndDate =
+                element.date?.isBefore(endDate ?? DateTime.now()) ?? false;
+
+            return isAfterStartDate && isBeforeEndDate;
+          },
+        ).toList(),
       );
     }
 

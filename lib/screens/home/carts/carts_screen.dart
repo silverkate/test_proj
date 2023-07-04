@@ -36,14 +36,28 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
         onRefresh: cartsBloc.loadAsyncFuture,
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: ElevatedButton(
-                  onPressed: () => _showRange(context),
-                  child: const Text('Start date - End date'),
-                ),
-              ),
+            BlocBuilder<CartsBloc,
+                NetworkFilterableState<List<Cart>, DateTimeRange?>>(
+              buildWhen: (previous, current) =>
+                  previous.filter != current.filter,
+              builder: (_, state) {
+                final filter = state.filter;
+
+                final buttonText = filter == null
+                    ? 'Start date - End date'
+                    : '${DateFormat.yMEd().format(filter.start)} -'
+                        ' ${DateFormat.yMEd().format(filter.end)}';
+
+                return SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: ElevatedButton(
+                      onPressed: () => _showRange(context),
+                      child: Text(buttonText),
+                    ),
+                  ),
+                );
+              },
             ),
             BlocBuilder<CartsBloc, NetworkListState<Cart>>(
               builder: (context, state) {
@@ -87,13 +101,13 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
     context.router.push(CartModalRoute());
   }
 
-  Future<void> _showRange(BuildContext context) async {
-    final result = await showDateRangePicker(
+  void _showRange(BuildContext context) {
+    showDateRangePicker(
       context: context,
       firstDate: DateTime(2015, 1, 1),
       lastDate: DateTime(2030, 12, 31),
       currentDate: DateTime.now(),
       saveText: 'Done',
-    );
+    ).then((value) => context.read<CartsBloc>().filter(value));
   }
 }
