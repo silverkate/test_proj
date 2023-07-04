@@ -33,7 +33,7 @@ class CartModalBloc extends FormBloc<Cart, String> {
     );
 
     for (final element in cart?.products ?? [const Product()]) {
-      _addProduct(element);
+      addProduct(element);
     }
 
     addFields([
@@ -69,7 +69,7 @@ class CartModalBloc extends FormBloc<Cart, String> {
     }
   }
 
-  void _addProduct(Product? product) {
+  void addProduct(Product? product) {
     products.addFieldBloc(
       GroupFieldBloc(
         fieldBlocs: [

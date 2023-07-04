@@ -57,9 +57,9 @@ class CartModalScreen extends StatelessWidget implements AutoRouteWrapper {
                   fieldBloc: formBloc.date,
                 ),
                 const Text('Products'),
-                ProductsModalWidget(products: cart?.products),
+                const ProductsModalWidget(),
                 ElevatedButton(
-                  onPressed: _addNewProduct,
+                  onPressed: () => _addNewProduct(context),
                   child: const Text('Add a new product'),
                 ),
                 ElevatedButton(
@@ -90,5 +90,7 @@ class CartModalScreen extends StatelessWidget implements AutoRouteWrapper {
     context.router.pop();
   }
 
-  void _addNewProduct() {}
+  void _addNewProduct(BuildContext context) {
+    context.read<CartModalBloc>().addProduct(const Product());
+  }
 }
