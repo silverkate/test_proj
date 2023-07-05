@@ -89,6 +89,6 @@ class CartModalScreen extends StatelessWidget implements AutoRouteWrapper {
   }
 
   void _addNewProduct(BuildContext context) {
-    context.read<CartModalBloc>().addProduct(const Product());
+    context.read<CartModalBloc>().addProduct(const CartProduct());
   }
 }

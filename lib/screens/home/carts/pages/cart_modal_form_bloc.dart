@@ -31,7 +31,7 @@ class CartModalBloc extends FormBloc<Cart, String> {
       rules: {ValidationType.onBlur},
     );
 
-    for (final element in cart?.products ?? [const Product()]) {
+    for (final element in cart?.products ?? [const CartProduct()]) {
       addProduct(element);
     }
 
@@ -50,7 +50,7 @@ class CartModalBloc extends FormBloc<Cart, String> {
       payload = payload.copyWith(
         products: products.fields
             .map(
-              (element) => Product(
+              (element) => CartProduct(
                 productId: element.fields[0].value,
                 quantity: element.fields[1].value,
               ),
@@ -68,7 +68,7 @@ class CartModalBloc extends FormBloc<Cart, String> {
     }
   }
 
-  void addProduct(Product? product) {
+  void addProduct(CartProduct? product) {
     products.addFieldBloc(
       GroupFieldBloc(
         fieldBlocs: [

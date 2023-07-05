@@ -23,7 +23,7 @@ mixin _$Cart {
   int? get id => throw _privateConstructorUsedError;
   int? get userId => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
-  List<Product>? get products => throw _privateConstructorUsedError;
+  List<CartProduct>? get products => throw _privateConstructorUsedError;
   int? get v => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +37,11 @@ abstract class $CartCopyWith<$Res> {
       _$CartCopyWithImpl<$Res, Cart>;
   @useResult
   $Res call(
-      {int? id, int? userId, DateTime? date, List<Product>? products, int? v});
+      {int? id,
+      int? userId,
+      DateTime? date,
+      List<CartProduct>? products,
+      int? v});
 }
 
 /// @nodoc
@@ -75,7 +79,7 @@ class _$CartCopyWithImpl<$Res, $Val extends Cart>
       products: freezed == products
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
-              as List<Product>?,
+              as List<CartProduct>?,
       v: freezed == v
           ? _value.v
           : v // ignore: cast_nullable_to_non_nullable
@@ -91,7 +95,11 @@ abstract class _$$_CartCopyWith<$Res> implements $CartCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id, int? userId, DateTime? date, List<Product>? products, int? v});
+      {int? id,
+      int? userId,
+      DateTime? date,
+      List<CartProduct>? products,
+      int? v});
 }
 
 /// @nodoc
@@ -125,7 +133,7 @@ class __$$_CartCopyWithImpl<$Res> extends _$CartCopyWithImpl<$Res, _$_Cart>
       products: freezed == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
-              as List<Product>?,
+              as List<CartProduct>?,
       v: freezed == v
           ? _value.v
           : v // ignore: cast_nullable_to_non_nullable
@@ -138,7 +146,11 @@ class __$$_CartCopyWithImpl<$Res> extends _$CartCopyWithImpl<$Res, _$_Cart>
 @JsonSerializable()
 class _$_Cart implements _Cart {
   const _$_Cart(
-      {this.id, this.userId, this.date, final List<Product>? products, this.v})
+      {this.id,
+      this.userId,
+      this.date,
+      final List<CartProduct>? products,
+      this.v})
       : _products = products;
 
   factory _$_Cart.fromJson(Map<String, dynamic> json) => _$$_CartFromJson(json);
@@ -149,9 +161,9 @@ class _$_Cart implements _Cart {
   final int? userId;
   @override
   final DateTime? date;
-  final List<Product>? _products;
+  final List<CartProduct>? _products;
   @override
-  List<Product>? get products {
+  List<CartProduct>? get products {
     final value = _products;
     if (value == null) return null;
     if (_products is EqualUnmodifiableListView) return _products;
@@ -203,7 +215,7 @@ abstract class _Cart implements Cart {
       {final int? id,
       final int? userId,
       final DateTime? date,
-      final List<Product>? products,
+      final List<CartProduct>? products,
       final int? v}) = _$_Cart;
 
   factory _Cart.fromJson(Map<String, dynamic> json) = _$_Cart.fromJson;
@@ -215,7 +227,7 @@ abstract class _Cart implements Cart {
   @override
   DateTime? get date;
   @override
-  List<Product>? get products;
+  List<CartProduct>? get products;
   @override
   int? get v;
   @override
@@ -223,32 +235,34 @@ abstract class _Cart implements Cart {
   _$$_CartCopyWith<_$_Cart> get copyWith => throw _privateConstructorUsedError;
 }
 
-Product _$ProductFromJson(Map<String, dynamic> json) {
-  return _Product.fromJson(json);
+CartProduct _$CartProductFromJson(Map<String, dynamic> json) {
+  return _CartProduct.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Product {
+mixin _$CartProduct {
   int? get productId => throw _privateConstructorUsedError;
   int? get quantity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ProductCopyWith<Product> get copyWith => throw _privateConstructorUsedError;
+  $CartProductCopyWith<CartProduct> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ProductCopyWith<$Res> {
-  factory $ProductCopyWith(Product value, $Res Function(Product) then) =
-      _$ProductCopyWithImpl<$Res, Product>;
+abstract class $CartProductCopyWith<$Res> {
+  factory $CartProductCopyWith(
+          CartProduct value, $Res Function(CartProduct) then) =
+      _$CartProductCopyWithImpl<$Res, CartProduct>;
   @useResult
   $Res call({int? productId, int? quantity});
 }
 
 /// @nodoc
-class _$ProductCopyWithImpl<$Res, $Val extends Product>
-    implements $ProductCopyWith<$Res> {
-  _$ProductCopyWithImpl(this._value, this._then);
+class _$CartProductCopyWithImpl<$Res, $Val extends CartProduct>
+    implements $CartProductCopyWith<$Res> {
+  _$CartProductCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -275,20 +289,22 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
 }
 
 /// @nodoc
-abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
-  factory _$$_ProductCopyWith(
-          _$_Product value, $Res Function(_$_Product) then) =
-      __$$_ProductCopyWithImpl<$Res>;
+abstract class _$$_CartProductCopyWith<$Res>
+    implements $CartProductCopyWith<$Res> {
+  factory _$$_CartProductCopyWith(
+          _$_CartProduct value, $Res Function(_$_CartProduct) then) =
+      __$$_CartProductCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? productId, int? quantity});
 }
 
 /// @nodoc
-class __$$_ProductCopyWithImpl<$Res>
-    extends _$ProductCopyWithImpl<$Res, _$_Product>
-    implements _$$_ProductCopyWith<$Res> {
-  __$$_ProductCopyWithImpl(_$_Product _value, $Res Function(_$_Product) _then)
+class __$$_CartProductCopyWithImpl<$Res>
+    extends _$CartProductCopyWithImpl<$Res, _$_CartProduct>
+    implements _$$_CartProductCopyWith<$Res> {
+  __$$_CartProductCopyWithImpl(
+      _$_CartProduct _value, $Res Function(_$_CartProduct) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -297,7 +313,7 @@ class __$$_ProductCopyWithImpl<$Res>
     Object? productId = freezed,
     Object? quantity = freezed,
   }) {
-    return _then(_$_Product(
+    return _then(_$_CartProduct(
       productId: freezed == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
@@ -312,11 +328,11 @@ class __$$_ProductCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Product implements _Product {
-  const _$_Product({this.productId, this.quantity});
+class _$_CartProduct implements _CartProduct {
+  const _$_CartProduct({this.productId, this.quantity});
 
-  factory _$_Product.fromJson(Map<String, dynamic> json) =>
-      _$$_ProductFromJson(json);
+  factory _$_CartProduct.fromJson(Map<String, dynamic> json) =>
+      _$$_CartProductFromJson(json);
 
   @override
   final int? productId;
@@ -325,14 +341,14 @@ class _$_Product implements _Product {
 
   @override
   String toString() {
-    return 'Product(productId: $productId, quantity: $quantity)';
+    return 'CartProduct(productId: $productId, quantity: $quantity)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Product &&
+            other is _$_CartProduct &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.quantity, quantity) ||
@@ -346,22 +362,23 @@ class _$_Product implements _Product {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductCopyWith<_$_Product> get copyWith =>
-      __$$_ProductCopyWithImpl<_$_Product>(this, _$identity);
+  _$$_CartProductCopyWith<_$_CartProduct> get copyWith =>
+      __$$_CartProductCopyWithImpl<_$_CartProduct>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProductToJson(
+    return _$$_CartProductToJson(
       this,
     );
   }
 }
 
-abstract class _Product implements Product {
-  const factory _Product({final int? productId, final int? quantity}) =
-      _$_Product;
+abstract class _CartProduct implements CartProduct {
+  const factory _CartProduct({final int? productId, final int? quantity}) =
+      _$_CartProduct;
 
-  factory _Product.fromJson(Map<String, dynamic> json) = _$_Product.fromJson;
+  factory _CartProduct.fromJson(Map<String, dynamic> json) =
+      _$_CartProduct.fromJson;
 
   @override
   int? get productId;
@@ -369,6 +386,6 @@ abstract class _Product implements Product {
   int? get quantity;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductCopyWith<_$_Product> get copyWith =>
+  _$$_CartProductCopyWith<_$_CartProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }

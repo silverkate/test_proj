@@ -24,7 +24,9 @@ class CodegenLoader extends AssetLoader{
   "signOut": "Se déconnecter",
   "error": "Error",
   "ok": "OK",
-  "carts": "Carts"
+  "carts": "Carts",
+  "products": "Products",
+  "category": "Category"
 };
 static const Map<String,dynamic> enUS = {
   "screenText": "Screen",
@@ -42,7 +44,9 @@ static const Map<String,dynamic> enUS = {
   "signOut": "Sign Out",
   "error": "Error",
   "ok": "OK",
-  "carts": "Carts"
+  "carts": "Carts",
+  "products": "Products",
+  "category": "Category"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"fr_FR": frFR, "en_US": enUS};
 static const List<Locale> supportedLocales = [Locale("fr", "FR"), Locale("en", "US")];

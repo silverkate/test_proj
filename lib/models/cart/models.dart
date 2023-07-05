@@ -9,7 +9,7 @@ class Cart with _$Cart {
     int? id,
     int? userId,
     DateTime? date,
-    List<Product>? products,
+    List<CartProduct>? products,
     int? v,
   }) = _Cart;
 
@@ -17,12 +17,12 @@ class Cart with _$Cart {
 }
 
 @freezed
-class Product with _$Product {
-  const factory Product({
+class CartProduct with _$CartProduct {
+  const factory CartProduct({
     int? productId,
     int? quantity,
-  }) = _Product;
+  }) = _CartProduct;
 
-  factory Product.fromJson(Map<String, dynamic> json) =>
-      _$ProductFromJson(json);
+  factory CartProduct.fromJson(Map<String, dynamic> json) =>
+      _$CartProductFromJson(json);
 }

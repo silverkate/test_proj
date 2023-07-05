@@ -12,7 +12,7 @@ _$_Cart _$$_CartFromJson(Map<String, dynamic> json) => _$_Cart(
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
       products: (json['products'] as List<dynamic>?)
-          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => CartProduct.fromJson(e as Map<String, dynamic>))
           .toList(),
       v: json['v'] as int?,
     );
@@ -25,12 +25,13 @@ Map<String, dynamic> _$$_CartToJson(_$_Cart instance) => <String, dynamic>{
       'v': instance.v,
     };
 
-_$_Product _$$_ProductFromJson(Map<String, dynamic> json) => _$_Product(
+_$_CartProduct _$$_CartProductFromJson(Map<String, dynamic> json) =>
+    _$_CartProduct(
       productId: json['productId'] as int?,
       quantity: json['quantity'] as int?,
     );
 
-Map<String, dynamic> _$$_ProductToJson(_$_Product instance) =>
+Map<String, dynamic> _$$_CartProductToJson(_$_CartProduct instance) =>
     <String, dynamic>{
       'productId': instance.productId,
       'quantity': instance.quantity,

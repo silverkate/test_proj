@@ -44,7 +44,7 @@ class CartWidget extends StatelessWidget {
   }
 
   Widget? _buildProducts(BuildContext context, int index) {
-    final product = cart.products?[index] ?? const Product();
+    final product = cart.products?[index] ?? const CartProduct();
 
     return Text(
       'Product id: ${product.productId}, quantity: ${product.quantity}.',
