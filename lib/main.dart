@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-
 import 'package:test_proj/blocs/observer.dart';
 import 'package:test_proj/localization/index.dart';
 import 'package:test_proj/services/index.dart';
+
 import 'app.dart';
 
 void main() async {
