@@ -2,8 +2,6 @@ import 'package:injectable/injectable.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/repositories/product_repository.dart';
 
-@Environment('hr')
-@Environment('me')
 @lazySingleton
 class StxCategoriesBloc
     extends NetworkListBloc<String, NetworkListState<String>> {

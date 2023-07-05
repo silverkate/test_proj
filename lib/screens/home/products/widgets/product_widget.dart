@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_proj/blocs/index.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/router/index.dart';
+import 'package:test_proj/services/index.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -34,10 +35,12 @@ class ProductWidget extends StatelessWidget {
   }
 
   void _removeItem(BuildContext context) {
-    context.read<StxProductsBloc>().removeItem(product);
+    getIt.get<StxProductsBloc>().removeItem(product);
   }
 
   void _editItem(BuildContext context) {
+    context.read<StxCategoriesBloc>().load();
+
     context.router.push(
       ProductModalRoute(product: product),
     );

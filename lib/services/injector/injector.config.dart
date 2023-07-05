@@ -91,12 +91,7 @@ extension GetItInjectableX on _i1.GetIt {
       },
     );
     gh.lazySingleton<_i11.StxCategoriesBloc>(
-      () => _i11.StxCategoriesBloc(gh<_i9.ProductRepository>()),
-      registerFor: {
-        _hr,
-        _me,
-      },
-    );
+        () => _i11.StxCategoriesBloc(gh<_i9.ProductRepository>()));
     gh.lazySingleton<_i12.StxProductsBloc>(
       () => _i12.StxProductsBloc(gh<_i9.ProductRepository>()),
       registerFor: {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_proj/localization/index.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/router/index.dart';
 import 'package:test_proj/screens/home/carts/carts_bloc.dart';
+import 'package:test_proj/services/index.dart';
 
 class CartWidget extends StatelessWidget {
   const CartWidget({
@@ -56,6 +56,6 @@ class CartWidget extends StatelessWidget {
   }
 
   void _delete(BuildContext context) {
-    context.read<CartsBloc>().removeItem(cart);
+    getIt.get<CartsBloc>().removeItem(cart);
   }
 }
