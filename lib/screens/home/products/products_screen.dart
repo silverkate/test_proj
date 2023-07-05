@@ -155,5 +155,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
     context.read<StxProductsBloc>().filter(newCategory ?? '');
   }
 
-  void _addElement() {}
+  void _addElement() {
+    context.router.push(
+      ProductModalRoute(),
+    );
+  }
 }

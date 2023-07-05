@@ -35,7 +35,11 @@ class AppRouter extends $AppRouter {
                 AutoRoute(page: SettingsRoute.page),
               ],
             ),
+
+            /// To show the page above all the nested ones, register them
+            /// outside of them all.
             AutoRoute(page: ChatDetailsRoute.page),
+            AutoRoute(page: ProductModalRoute.page),
           ],
         ),
       ],

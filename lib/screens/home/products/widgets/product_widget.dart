@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_proj/blocs/index.dart';
 import 'package:test_proj/models/index.dart';
+import 'package:test_proj/router/index.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -18,11 +21,11 @@ class ProductWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            onPressed: _editItem,
+            onPressed: () => _editItem(context),
             icon: const Icon(Icons.edit),
           ),
           IconButton(
-            onPressed: _removeItem,
+            onPressed: () => _removeItem(context),
             icon: const Icon(Icons.delete),
           ),
         ],
@@ -30,7 +33,13 @@ class ProductWidget extends StatelessWidget {
     );
   }
 
-  void _removeItem() {}
+  void _removeItem(BuildContext context) {
+    context.read<StxProductsBloc>().removeItem(product);
+  }
 
-  void _editItem() {}
+  void _editItem(BuildContext context) {
+    context.router.push(
+      ProductModalRoute(product: product),
+    );
+  }
 }

@@ -83,6 +83,6 @@ class StxProductsBloc extends NetworkFilterableListBloc<
 
   @override
   bool equals(Product item1, Product item2) {
-    return item1.title == item2.title;
+    return item1.id == item2.id;
   }
 }
