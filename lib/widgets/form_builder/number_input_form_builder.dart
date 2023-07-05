@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 import 'package:test_proj/styles/index.dart';
 
-class TextInputFormBuilder extends StatefulWidget {
-  const TextInputFormBuilder({
+class NumberInputFormBuilder extends StatefulWidget {
+  const NumberInputFormBuilder({
     super.key,
     this.label = '',
     this.hintText,
@@ -15,9 +15,6 @@ class TextInputFormBuilder extends StatefulWidget {
     this.fieldFocusNode,
     this.nextFieldFocusNode,
     this.onSubmit,
-    this.maxLines = 1,
-    this.inputFormatters,
-    this.keyboardType,
     required this.fieldBloc,
   });
 
@@ -27,30 +24,28 @@ class TextInputFormBuilder extends StatefulWidget {
   final FocusNode? fieldFocusNode;
   final FocusNode? nextFieldFocusNode;
   final VoidCallback? onSubmit;
-  final int? maxLines;
-  final TextInputType? keyboardType;
-  final List<TextInputFormatter>? inputFormatters;
-  final TextFieldBloc fieldBloc;
+  final NumberFieldBloc fieldBloc;
 
   @override
-  State<TextInputFormBuilder> createState() => _TextInputFormBuilderState();
+  State<NumberInputFormBuilder> createState() => _NumberInputFormBuilderState();
 }
 
-class _TextInputFormBuilderState extends State<TextInputFormBuilder> {
+class _NumberInputFormBuilderState extends State<NumberInputFormBuilder> {
   late TextEditingController _controller;
 
   @override
   void initState() {
-    _controller = TextEditingController(text: widget.fieldBloc.value);
+    _controller =
+        TextEditingController(text: widget.fieldBloc.value?.toString());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TextFieldBloc, TextFieldBlocState>(
+    return BlocBuilder<NumberFieldBloc, NumberFieldBlocState>(
       bloc: widget.fieldBloc,
       builder: (context, state) {
-        if (_controller.text != state.value) {
+        if (_controller.text != state.value.toString()) {
           final previousSelection = _controller.selection;
 
           final offset =
@@ -70,19 +65,22 @@ class _TextInputFormBuilderState extends State<TextInputFormBuilder> {
             }
           },
           child: TextField(
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+            ],
             controller: _controller,
             autocorrect: false,
             textInputAction: TextInputAction.next,
             focusNode: widget.fieldFocusNode,
             obscureText: widget.isObscureText,
-            onChanged: (value) => widget.fieldBloc.changeValue(value),
+            onChanged: (value) => widget.fieldBloc.changeValue(
+              int.tryParse(value),
+            ),
             onSubmitted: (value) {
               widget.nextFieldFocusNode?.requestFocus();
               widget.onSubmit?.call();
             },
-            inputFormatters: widget.inputFormatters,
-            maxLines: widget.maxLines,
-            keyboardType: widget.keyboardType,
             decoration: InputDecoration(
               hintText: widget.hintText,
               errorText: state.displayError,

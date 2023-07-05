@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_proj/blocs/index.dart';
-import 'package:test_proj/screens/home/users/users_bloc.dart';
 import 'package:test_proj/services/index.dart';
 
 class HomeStateWrapper extends StatelessWidget {
@@ -21,6 +20,18 @@ class HomeStateWrapper extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<UsersBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<CartsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<ProductsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<StxProductsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<StxCategoriesBloc>(),
         ),
       ],
       child: child,

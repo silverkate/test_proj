@@ -16,6 +16,8 @@ class HomeScreen extends StatelessWidget {
       routes: const [
         DashboardRoute(),
         UsersRoute(),
+        CartsRoute(),
+        ProductsRoute(),
         MessagesRoute(),
         SettingsRoute(),
       ],
@@ -42,6 +44,14 @@ class HomeScreen extends StatelessWidget {
               BottomNavigationBarItem(
                 icon: const Icon(Icons.supervised_user_circle_sharp),
                 label: LocaleKeys.users.tr(),
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.shopping_cart_sharp),
+                label: LocaleKeys.carts.tr(),
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.production_quantity_limits),
+                label: LocaleKeys.products.tr(),
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.message),
