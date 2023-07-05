@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:test_proj/blocs/index.dart';
 import 'package:test_proj/localization/index.dart';
 import 'package:test_proj/router/index.dart';
+import 'package:test_proj/services/index.dart';
 import 'package:test_proj/widgets/index.dart';
 
 @RoutePage()
-class UserModalScreen extends StatelessWidget {
+class UserModalScreen extends StatelessWidget with AutoRouteWrapper {
   const UserModalScreen({super.key});
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    getIt.get<StxProductsBloc>().load();
+    getIt.get<CartsBloc>().load();
+
+    return this;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +24,8 @@ class UserModalScreen extends StatelessWidget {
     return AutoTabsScaffold(
       endDrawer: const AppDrawer(),
       routes: const [
-        ProductsRoute(),
         CartsRoute(),
+        ProductsRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return DecoratedBox(

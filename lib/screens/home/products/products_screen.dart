@@ -5,6 +5,7 @@ import 'package:test_proj/localization/index.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/router/index.dart';
 import 'package:test_proj/screens/home/products/widgets/product_widget.dart';
+import 'package:test_proj/services/index.dart';
 
 @RoutePage()
 class ProductsScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -12,8 +13,8 @@ class ProductsScreen extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    context.read<StxProductsBloc>().load();
-    context.read<StxCategoriesBloc>().load();
+    getIt.get<StxProductsBloc>().load();
+    getIt.get<StxCategoriesBloc>().load();
 
     return this;
   }
@@ -34,7 +35,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     EasyLocalization.of(context);
-    final productsBloc = context.read<StxProductsBloc>();
+    final productsBloc = getIt.get<StxProductsBloc>();
 
     return Scaffold(
       appBar: AppBar(
@@ -112,6 +113,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
             ),
             BlocBuilder<StxProductsBloc,
                 NetworkFilterableExtraListState<Product, String, List<String>>>(
+              bloc: productsBloc,
               builder: (context, state) {
                 switch (state.status) {
                   case NetworkStatus.initial:
@@ -148,11 +150,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   void _search(String query) {
-    context.read<StxProductsBloc>().search(query);
+    getIt.get<StxProductsBloc>().search(query);
   }
 
   void _setNewCategory(String? newCategory) {
-    context.read<StxProductsBloc>().filter(newCategory ?? '');
+    getIt.get<StxProductsBloc>().filter(newCategory ?? '');
   }
 
   void _addElement() {

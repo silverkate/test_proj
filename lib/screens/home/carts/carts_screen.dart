@@ -5,6 +5,7 @@ import 'package:test_proj/models/index.dart';
 import 'package:test_proj/router/index.dart';
 import 'package:test_proj/screens/home/carts/carts_bloc.dart';
 import 'package:test_proj/screens/home/carts/widgets/index.dart';
+import 'package:test_proj/services/index.dart';
 
 @RoutePage()
 class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
@@ -12,7 +13,7 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    context.read<CartsBloc>().load();
+    getIt.get<CartsBloc>().load();
 
     return this;
   }
@@ -20,7 +21,7 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     EasyLocalization.of(context);
-    final cartsBloc = context.read<CartsBloc>();
+    final cartsBloc = getIt.get<CartsBloc>();
 
     return Scaffold(
       appBar: AppBar(
@@ -61,6 +62,7 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
             ),
             BlocBuilder<CartsBloc,
                 NetworkFilterableState<List<Cart>, DateTimeRange?>>(
+              bloc: cartsBloc,
               builder: (context, state) {
                 switch (state.status) {
                   case NetworkStatus.initial:
@@ -111,7 +113,7 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
       saveText: 'Done',
     ).then((value) {
       if (value != null) {
-        context.read<CartsBloc>().filter(value);
+        getIt.get<CartsBloc>().filter(value);
       }
     });
   }
