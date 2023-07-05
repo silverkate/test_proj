@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:test_proj/screens/login/widgets/index.dart';
 import 'package:test_proj/widgets/index.dart';
+
 import '../login_form_bloc.dart';
 
 class LoginForm extends StatelessWidget {
