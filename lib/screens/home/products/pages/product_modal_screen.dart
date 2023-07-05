@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_proj/blocs/index.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/router/index.dart';
 import 'package:test_proj/screens/home/products/pages/product_modal_form_bloc.dart';
-import 'package:test_proj/screens/home/products/stx_products_bloc.dart';
 import 'package:test_proj/services/index.dart';
 import 'package:test_proj/widgets/form_builder/index.dart';
 
@@ -40,7 +40,7 @@ class ProductModalScreen extends StatelessWidget implements AutoRouteWrapper {
         onSuccess: (_, state) {
           // ignore: cast_nullable_to_non_nullable
           final product = state.response as Product;
-          final productBloc = context.read<StxProductsBloc>();
+          final productBloc = getIt.get<StxProductsBloc>();
 
           if (state.isEditing) {
             productBloc.editItem(product);

@@ -112,6 +112,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
             ),
             BlocBuilder<StxProductsBloc,
                 NetworkFilterableExtraListState<Product, String, List<String>>>(
+              bloc: productsBloc,
               builder: (context, state) {
                 switch (state.status) {
                   case NetworkStatus.initial:

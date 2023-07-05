@@ -76,7 +76,7 @@ class CartModalScreen extends StatelessWidget implements AutoRouteWrapper {
     BuildContext context,
     FormBlocState<dynamic, String> state,
   ) {
-    final cartsBloc = context.read<CartsBloc>();
+    final cartsBloc = getIt.get<CartsBloc>();
     final cart = state.response as Cart;
 
     if (state.isEditing) {

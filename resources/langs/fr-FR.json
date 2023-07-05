@@ -20,6 +20,7 @@
     "error": "Error",
     "ok": "OK",
 
+    "users": "Users",
     "carts": "Carts",
     "products": "Products",
     "category": "Category"

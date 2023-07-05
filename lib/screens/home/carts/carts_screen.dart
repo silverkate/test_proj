@@ -61,6 +61,7 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
             ),
             BlocBuilder<CartsBloc,
                 NetworkFilterableState<List<Cart>, DateTimeRange?>>(
+              bloc: cartsBloc,
               builder: (context, state) {
                 switch (state.status) {
                   case NetworkStatus.initial:

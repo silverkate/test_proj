@@ -10,6 +10,8 @@ part 'products_bloc.freezed.dart';
 part 'products_event.dart';
 part 'products_state.dart';
 
+@Environment('hr')
+@Environment('me')
 @lazySingleton
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final ProductRepository repository;

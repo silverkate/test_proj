@@ -3,6 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/repositories/carts_repository.dart';
 
+@Environment('hr')
+@Environment('me')
 @lazySingleton
 class CartsBloc extends NetworkFilterableListBloc<Cart, DateTimeRange?,
     NetworkFilterableState<List<Cart>, DateTimeRange?>> {

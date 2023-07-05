@@ -24,6 +24,7 @@ class CodegenLoader extends AssetLoader{
   "signOut": "Se déconnecter",
   "error": "Error",
   "ok": "OK",
+  "users": "Users",
   "carts": "Carts",
   "products": "Products",
   "category": "Category"
@@ -44,6 +45,7 @@ static const Map<String,dynamic> enUS = {
   "signOut": "Sign Out",
   "error": "Error",
   "ok": "OK",
+  "users": "Users",
   "carts": "Carts",
   "products": "Products",
   "category": "Category"
