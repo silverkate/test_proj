@@ -10,7 +10,8 @@ import 'package:test_proj/repositories/product_repository.dart';
 // S - state
 // E - extra
 
-/// String -> category
+@Environment('hr')
+@Environment('me')
 @lazySingleton
 class StxProductsBloc extends NetworkFilterableListBloc<
 

@@ -84,15 +84,35 @@ extension GetItInjectableX on _i1.GetIt {
       registerFor: {_hr},
     );
     gh.lazySingleton<_i10.ProductsBloc>(
-        () => _i10.ProductsBloc(repository: gh<_i9.ProductRepository>()));
+      () => _i10.ProductsBloc(repository: gh<_i9.ProductRepository>()),
+      registerFor: {
+        _hr,
+        _me,
+      },
+    );
     gh.lazySingleton<_i11.StxCategoriesBloc>(
-        () => _i11.StxCategoriesBloc(gh<_i9.ProductRepository>()));
+      () => _i11.StxCategoriesBloc(gh<_i9.ProductRepository>()),
+      registerFor: {
+        _hr,
+        _me,
+      },
+    );
     gh.lazySingleton<_i12.StxProductsBloc>(
-        () => _i12.StxProductsBloc(gh<_i9.ProductRepository>()));
+      () => _i12.StxProductsBloc(gh<_i9.ProductRepository>()),
+      registerFor: {
+        _hr,
+        _me,
+      },
+    );
     gh.lazySingleton<_i13.UsersBloc>(
         () => _i13.UsersBloc(gh<_i14.UserRepository>()));
     gh.lazySingleton<_i15.CartsBloc>(
-        () => _i15.CartsBloc(gh<_i5.CartsRepository>()));
+      () => _i15.CartsBloc(gh<_i5.CartsRepository>()),
+      registerFor: {
+        _hr,
+        _me,
+      },
+    );
     gh.lazySingleton<_i16.ChatsBloc>(
       () => _i16.ChatsBloc(repository: gh<_i14.ChatsRepository>()),
       registerFor: {
