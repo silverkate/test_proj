@@ -24,6 +24,7 @@ class AppRouter extends $AppRouter {
               page: HomeRoute.page,
               children: [
                 AutoRoute(page: DashboardRoute.page),
+                AutoRoute(page: CartsRoute.page),
                 AutoRoute(page: ProductsRoute.page),
                 AutoRoute(
                   page: MessagesRoute.page,
@@ -39,6 +40,7 @@ class AppRouter extends $AppRouter {
             /// To show the page above all the nested ones, register them
             /// outside of them all.
             AutoRoute(page: ChatDetailsRoute.page),
+            AutoRoute(page: CartModalRoute.page),
             AutoRoute(page: ProductModalRoute.page),
           ],
         ),

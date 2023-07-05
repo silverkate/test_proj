@@ -19,6 +19,8 @@
 
     "error": "Error",
     "ok": "OK",
+
+    "carts": "Carts",
     "products": "Products",
     "category": "Category"
 }
