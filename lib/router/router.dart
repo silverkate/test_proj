@@ -46,8 +46,6 @@ class AppRouter extends $AppRouter {
             AutoRoute(
               page: UserModalRoute.page,
               children: [
-                // products - override repository
-                // carts - override repository
                 AutoRoute(page: ProductsRoute.page),
                 AutoRoute(page: CartsRoute.page),
               ],

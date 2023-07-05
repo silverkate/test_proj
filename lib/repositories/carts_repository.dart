@@ -23,8 +23,6 @@ class HrCartsRepository extends CartsRepository {
 
   @override
   Future<List<Cart>> getCarts() async {
-    //final response = await httpClient.get('/carts');
-
     return [const Cart()];
   }
 }

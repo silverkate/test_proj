@@ -17,7 +17,7 @@ void configureAuthDependencies() {
     ..initAuthScope();
 }
 
-//register other dependencies (except auth ones)
+//register 'me' scope dependencies (and all other unmarked)
 void configureUserDependencies(GetIt getIt) {
   final isRegistered = getIt.isRegistered<EnvironmentFilter>(
     instanceName: kEnvironmentsFilterName,
@@ -32,7 +32,7 @@ void configureUserDependencies(GetIt getIt) {
   getIt.init(environment: 'me');
 }
 
-//
+//register 'hr' scope dependencies (and all other unmarked)
 void configureHrDependencies(GetIt getIt) {
   final isRegistered = getIt.isRegistered<EnvironmentFilter>(
     instanceName: kEnvironmentsFilterName,
