@@ -58,7 +58,13 @@ extension GetItInjectableX on _i1.GetIt {
     ) =>
         _i3.CartModalBloc(cart: cart));
     gh.factory<_i5.CartsRepository>(
-        () => _i5.CartsRepository(gh<_i6.HttpClient>()));
+      () => _i5.CartsRepository(gh<_i6.HttpClient>()),
+      registerFor: {_me},
+    );
+    gh.factory<_i5.CartsRepository>(
+      () => _i5.HrCartsRepository(gh<_i6.HttpClient>()),
+      registerFor: {_hr},
+    );
     gh.factory<_i7.ChatsRepository>(
       () => _i7.ChatsRepository(gh<_i6.HttpClient>()),
       registerFor: {_me},
@@ -70,7 +76,13 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i8.PostsRepository>(
         () => _i8.PostsRepository(gh<_i6.HttpClient>()));
     gh.factory<_i9.ProductRepository>(
-        () => _i9.ProductRepository(gh<_i6.HttpClient>()));
+      () => _i9.ProductRepository(gh<_i6.HttpClient>()),
+      registerFor: {_me},
+    );
+    gh.factory<_i9.ProductRepository>(
+      () => _i9.HrProductRepository(gh<_i6.HttpClient>()),
+      registerFor: {_hr},
+    );
     gh.lazySingleton<_i10.ProductsBloc>(
         () => _i10.ProductsBloc(repository: gh<_i9.ProductRepository>()));
     gh.lazySingleton<_i11.StxCategoriesBloc>(

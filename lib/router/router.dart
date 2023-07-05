@@ -48,7 +48,8 @@ class AppRouter extends $AppRouter {
               children: [
                 // products - override repository
                 // carts - override repository
-                AutoRoute(page: ChatsRoute.page),
+                AutoRoute(page: ProductsRoute.page),
+                AutoRoute(page: CartsRoute.page),
               ],
             ),
           ],

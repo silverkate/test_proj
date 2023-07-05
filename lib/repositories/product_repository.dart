@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/services/http/http_client.dart';
 
+@Environment('me')
 @injectable
 class ProductRepository {
   final HttpClient httpClient;
@@ -42,5 +43,21 @@ class ProductRepository {
         .toList();
 
     return categories;
+  }
+}
+
+@Environment('hr')
+@Injectable(as: ProductRepository)
+class HrProductRepository extends ProductRepository {
+  HrProductRepository(super.httpClient);
+
+  @override
+  Future<List<Product>> getProducts() async {
+    return [
+      const Product(
+        title: 'Test product',
+        description: 'Description',
+      )
+    ];
   }
 }

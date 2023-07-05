@@ -14,8 +14,8 @@ class UserModalScreen extends StatelessWidget {
     return AutoTabsScaffold(
       endDrawer: const AppDrawer(),
       routes: const [
-        ChatsRoute(),
-        ChatsRoute(),
+        ProductsRoute(),
+        CartsRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return DecoratedBox(
@@ -34,12 +34,12 @@ class UserModalScreen extends StatelessWidget {
             onTap: tabsRouter.setActiveIndex,
             items: [
               BottomNavigationBarItem(
-                icon: const Icon(Icons.dashboard),
-                label: LocaleKeys.dashboard.tr(),
+                icon: const Icon(Icons.shopping_cart_sharp),
+                label: LocaleKeys.carts.tr(),
               ),
               BottomNavigationBarItem(
-                icon: const Icon(Icons.supervised_user_circle_sharp),
-                label: LocaleKeys.users.tr(),
+                icon: const Icon(Icons.production_quantity_limits),
+                label: LocaleKeys.products.tr(),
               ),
             ],
           ),
