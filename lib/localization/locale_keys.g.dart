@@ -16,5 +16,8 @@ abstract class  LocaleKeys {
   static const error = 'error';
   static const ok = 'ok';
   static const users = 'users';
+  static const carts = 'carts';
+  static const products = 'products';
+  static const category = 'category';
 
 }
