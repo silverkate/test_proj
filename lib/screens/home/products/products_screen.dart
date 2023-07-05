@@ -5,7 +5,6 @@ import 'package:test_proj/localization/index.dart';
 import 'package:test_proj/models/index.dart';
 import 'package:test_proj/router/index.dart';
 import 'package:test_proj/screens/home/products/widgets/product_widget.dart';
-import 'package:test_proj/services/index.dart';
 
 @RoutePage()
 class ProductsScreen extends StatefulWidget implements AutoRouteWrapper {
@@ -13,8 +12,8 @@ class ProductsScreen extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    getIt.get<StxProductsBloc>().load();
-    getIt.get<StxCategoriesBloc>().load();
+    context.read<StxProductsBloc>().load();
+    context.read<StxCategoriesBloc>().load();
 
     return this;
   }
@@ -35,7 +34,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     EasyLocalization.of(context);
-    final productsBloc = getIt.get<StxProductsBloc>();
+    final productsBloc = context.read<StxProductsBloc>();
 
     return Scaffold(
       appBar: AppBar(
@@ -150,11 +149,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
   }
 
   void _search(String query) {
-    getIt.get<StxProductsBloc>().search(query);
+    context.read<StxProductsBloc>().search(query);
   }
 
   void _setNewCategory(String? newCategory) {
-    getIt.get<StxProductsBloc>().filter(newCategory ?? '');
+    context.read<StxProductsBloc>().filter(newCategory ?? '');
   }
 
   void _addElement() {

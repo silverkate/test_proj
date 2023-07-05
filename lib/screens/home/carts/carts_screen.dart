@@ -5,7 +5,6 @@ import 'package:test_proj/models/index.dart';
 import 'package:test_proj/router/index.dart';
 import 'package:test_proj/screens/home/carts/carts_bloc.dart';
 import 'package:test_proj/screens/home/carts/widgets/index.dart';
-import 'package:test_proj/services/index.dart';
 
 @RoutePage()
 class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
@@ -13,7 +12,7 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    getIt.get<CartsBloc>().load();
+    context.read<CartsBloc>().load();
 
     return this;
   }
@@ -21,7 +20,7 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     EasyLocalization.of(context);
-    final cartsBloc = getIt.get<CartsBloc>();
+    final cartsBloc = context.read<CartsBloc>();
 
     return Scaffold(
       appBar: AppBar(
@@ -113,7 +112,7 @@ class CartsScreen extends StatelessWidget implements AutoRouteWrapper {
       saveText: 'Done',
     ).then((value) {
       if (value != null) {
-        getIt.get<CartsBloc>().filter(value);
+        context.read<CartsBloc>().filter(value);
       }
     });
   }
