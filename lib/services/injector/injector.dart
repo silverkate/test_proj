@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-
 import 'package:test_proj/router/index.dart';
+
 import 'injector.config.dart';
 
 final getIt = GetIt.instance;
@@ -19,5 +19,36 @@ void configureAuthDependencies() {
 
 //register other dependencies (except auth ones)
 void configureUserDependencies(GetIt getIt) {
-  getIt.init();
+  final isRegistered = getIt.isRegistered<EnvironmentFilter>(
+    instanceName: kEnvironmentsFilterName,
+  );
+
+  if (isRegistered) {
+    getIt
+      ..unregister<EnvironmentFilter>(instanceName: kEnvironmentsFilterName)
+      ..unregister<Set<String>>(instanceName: kEnvironmentsName);
+  }
+
+  getIt.init(environment: 'me');
+}
+
+//
+void configureHrDependencies(GetIt getIt) {
+  final isRegistered = getIt.isRegistered<EnvironmentFilter>(
+    instanceName: kEnvironmentsFilterName,
+  );
+
+  if (isRegistered) {
+    getIt
+      ..unregister<EnvironmentFilter>(instanceName: kEnvironmentsFilterName)
+      ..unregister<Set<String>>(instanceName: kEnvironmentsName);
+  }
+
+  final filter = SimpleEnvironmentFilter(
+    environments: {'hr'},
+    filter: (registerFor) {
+      return registerFor.contains('hr');
+    },
+  );
+  getIt.init(environmentFilter: filter);
 }

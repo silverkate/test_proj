@@ -25,6 +25,9 @@ import 'package:test_proj/screens/home/users/users_bloc.dart' as _i6;
 import 'package:test_proj/screens/login/login_form_bloc.dart' as _i13;
 import 'package:test_proj/services/http/http_client.dart' as _i4;
 
+const String _me = 'me';
+const String _hr = 'hr';
+
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
   _i1.GetIt init({
@@ -37,13 +40,24 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     gh.factory<_i3.ChatsRepository>(
-        () => _i3.ChatsRepository(gh<_i4.HttpClient>()));
+      () => _i3.ChatsRepository(gh<_i4.HttpClient>()),
+      registerFor: {_me},
+    );
+    gh.factory<_i3.ChatsRepository>(
+      () => _i3.HrChatsRepository(gh<_i4.HttpClient>()),
+      registerFor: {_hr},
+    );
     gh.factory<_i5.PostsRepository>(
         () => _i5.PostsRepository(gh<_i4.HttpClient>()));
     gh.lazySingleton<_i6.UsersBloc>(
         () => _i6.UsersBloc(gh<_i7.UserRepository>()));
     gh.lazySingleton<_i8.ChatsBloc>(
-        () => _i8.ChatsBloc(repository: gh<_i7.ChatsRepository>()));
+      () => _i8.ChatsBloc(repository: gh<_i7.ChatsRepository>()),
+      registerFor: {
+        _hr,
+        _me,
+      },
+    );
     gh.lazySingleton<_i9.PostsBloc>(
         () => _i9.PostsBloc(gh<_i7.PostsRepository>()));
     return this;
